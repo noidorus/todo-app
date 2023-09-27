@@ -1,10 +1,12 @@
 import { legacy_createStore as createStore, combineReducers } from 'redux';
 import { boardsReducer } from './reducers/boardsReducer';
 import { listsByIdReducer } from './reducers/listsById';
+import { cardsByIdReducer } from './reducers/cardsById';
 
 const reducers = combineReducers({
   boards: boardsReducer,
   listById: listsByIdReducer,
+  cardsById: cardsByIdReducer,
 });
 
 const store = createStore(reducers);

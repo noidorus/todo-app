@@ -1,14 +1,18 @@
+* {
+  box-sizing: border-box;
+}
+body {
+  background-color: orange;
+}
 a {
   text-decoration: none;
   color: black;
 }
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  background-color: orange;
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
 }
 
 .App {

@@ -1,15 +1,45 @@
-import List from './TaskList/List';
-
+import List from './CardList/List';
+import { DragDropContext, DropResult } from 'react-beautiful-dnd';
 import './Board.scss';
+import { connect } from 'react-redux';
+import { moveCard } from '../../redux/actions/listByIdActions';
 
-export const Board = ({ lists }: BoardProps) => {
+const Board = ({ lists, moveCard }: BoardProps) => {
   const elements = lists.map((list, index) => (
     <List key={list} index={index} listId={list} />
   ));
 
-  return <div className="lists">{elements}</div>;
+  const handleDragEnd = ({ source, destination, type }: DropResult) => {
+    if (!destination) return;
+
+    if (
+      source.index !== destination.index ||
+      source.droppableId !== destination.droppableId
+    ) {
+      moveCard(
+        source.droppableId,
+        destination.droppableId,
+        source.index,
+        destination.index
+      );
+    }
+  };
+
+  return (
+    <DragDropContext onDragEnd={handleDragEnd}>
+      <div className="lists">{elements}</div>
+    </DragDropContext>
+  );
 };
+
+export default connect(null, { moveCard })(Board);
 
 interface BoardProps {
   lists: string[];
+  moveCard: (
+    sourceListId: string,
+    destListId: string,
+    oldCardIndex: number,
+    newCardIndex: number
+  ) => void;
 }

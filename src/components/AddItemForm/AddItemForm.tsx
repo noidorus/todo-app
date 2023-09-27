@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState, KeyboardEvent } from 'react';
 
 import './AddItemForm.scss';
 import { EditButtons } from '../EditButtons/EditButtons';
@@ -14,12 +14,23 @@ const AddItemForm = ({ addItem }: NewBoardFormProps) => {
     setAddingItem(false);
   };
 
+  const onEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === 'Enter' && !e.shiftKey && title.trim()) {
+      addItem(title);
+      setTitle('');
+      setAddingItem(false);
+    }
+  };
+
   const onChangeInputText = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setTitle(e.target.value);
   };
 
   const toggleAddingBoard = () => {
     setAddingItem((state) => !state);
+    if (addingItem) {
+      setTitle('');
+    }
   };
 
   return addingItem ? (
@@ -29,8 +40,13 @@ const AddItemForm = ({ addItem }: NewBoardFormProps) => {
         onChange={onChangeInputText}
         value={title}
         autoFocus
+        onKeyDown={onEnter}
       />
-      <EditButtons close={toggleAddingBoard} name="Create" />
+      <EditButtons
+        disabled={!title.trim().length}
+        close={toggleAddingBoard}
+        name="Create"
+      />
     </form>
   ) : (
     <div className="item add-board add-board__btn" onClick={toggleAddingBoard}>

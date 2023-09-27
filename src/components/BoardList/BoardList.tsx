@@ -4,9 +4,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { BoardItem } from './BoardItem/BoardItem';
 import { State } from '../../redux/store';
 import { addBoard } from '../../redux/reducers/boardsReducer';
-import { createNewLists } from '../../redux/reducers/listsById';
+import { createNewLists } from '../../redux/actions/listByIdActions';
 import { BoardType } from '../../types';
 import AddItemForm from '../AddItemForm/AddItemForm';
+
+import './BoardList.scss';
 
 const BoardList = ({ boards, addBoard, createNewLists }: BoardsPageProps) => {
   const onAddBoard = (title: string) => {
@@ -22,7 +24,7 @@ const BoardList = ({ boards, addBoard, createNewLists }: BoardsPageProps) => {
   ));
 
   return (
-    <TransitionGroup className="boards__list">
+    <TransitionGroup className="board__list">
       <AddItemForm addItem={onAddBoard} />
       {elements}
     </TransitionGroup>

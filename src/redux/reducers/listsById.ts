@@ -1,6 +1,11 @@
 import { Reducer } from 'redux';
 import { ListType } from '../../types';
-const CREATE_NEW_LISTS = 'CREATE_NEW_LISTS';
+import {
+  ADD_CARD_TO_LIST,
+  CREATE_NEW_LISTS,
+  ListByIdActions,
+  MOVE_CARD,
+} from '../actions/listByIdActions';
 
 interface ListbyIdState {
   [key: string]: ListType;
@@ -16,33 +21,48 @@ export const listsByIdReducer: Reducer<ListbyIdState, ListByIdActions> = (
         [payload[0]]: {
           id: payload[0],
           title: 'Queue',
-          todos: [],
+          cards: [],
         },
         [payload[1]]: {
           id: payload[1],
           title: 'Development',
-          todos: [],
+          cards: [],
         },
         [payload[2]]: {
           id: payload[2],
           title: 'Done',
-          todos: [],
+          cards: [],
         },
       };
       return { ...state, ...newLists };
+    case ADD_CARD_TO_LIST:
+      const { cardId, listId } = payload;
+      return {
+        ...state,
+        [listId]: { ...state[listId], cards: [...state[listId].cards, cardId] },
+      };
+    case MOVE_CARD:
+      const { oldCardIndex, newCardIndex, sourceListId, destListId } = payload;
+      if (sourceListId === destListId) {
+        const newCards = Array.from(state[sourceListId].cards);
+        const [removedCard] = newCards.splice(oldCardIndex, 1);
+        newCards.splice(newCardIndex, 0, removedCard);
+        return {
+          ...state,
+          [sourceListId]: { ...state[sourceListId], cards: newCards },
+        };
+      }
+
+      const sourceCards = Array.from(state[sourceListId].cards);
+      const [removedCard] = sourceCards.splice(oldCardIndex, 1);
+      const destinationCards = Array.from(state[destListId].cards);
+      destinationCards.splice(newCardIndex, 0, removedCard);
+      return {
+        ...state,
+        [sourceListId]: { ...state[sourceListId], cards: sourceCards },
+        [destListId]: { ...state[destListId], cards: destinationCards },
+      };
     default:
       return state;
   }
 };
-
-export const createNewLists = (listIds: string[]) => ({
-  type: CREATE_NEW_LISTS,
-  payload: listIds,
-});
-
-interface CreateNewLists {
-  type: typeof CREATE_NEW_LISTS;
-  payload: string[];
-}
-
-type ListByIdActions = CreateNewLists;

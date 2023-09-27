@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { State } from '../../redux/store';
 import { BoardType } from '../../types';
-import { Board } from '../../components/Board/Board';
+import Board from '../../components/Board/Board';
 
 const ActiveBoardPage = ({ boards }: ActiveBoardPageProps) => {
   const { id } = useParams();

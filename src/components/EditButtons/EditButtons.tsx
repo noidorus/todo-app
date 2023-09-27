@@ -1,10 +1,10 @@
 import './EditButtons.scss';
 import CloseIcon from '../../assets/images/close-outline.svg';
 
-export const EditButtons = ({ name, close }: EditButtonsProps) => {
+export const EditButtons = ({ name, close, disabled }: EditButtonsProps) => {
   return (
     <div className="edit-btns">
-      <button className="edit-btn" type="submit">
+      <button className="edit-btn" type="submit" disabled={disabled}>
         {name}
       </button>
       <img
@@ -20,4 +20,5 @@ export const EditButtons = ({ name, close }: EditButtonsProps) => {
 interface EditButtonsProps {
   name: string;
   close: () => void;
+  disabled: boolean;
 }

@@ -8,11 +8,12 @@ export interface BoardType {
 export type ListType = {
   id: string;
   title: string;
-  todos: string[];
+  cards: string[];
 };
 
-// export interface Todo {
-//   title: string;
-//   description: string;
-//   // comments: []
-// }
+export interface CardType {
+  id: string;
+  title: string;
+  description: string;
+  comments: string[];
+}
