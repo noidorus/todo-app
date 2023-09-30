@@ -2,6 +2,7 @@ import { legacy_createStore as createStore, combineReducers } from 'redux';
 import { boardsReducer } from './reducers/boardsReducer';
 import { listsByIdReducer } from './reducers/listsById';
 import { cardsByIdReducer } from './reducers/cardsById';
+import { throttle } from '../helpers/helpers';
 
 const reducers = combineReducers({
   boards: boardsReducer,
@@ -9,7 +10,35 @@ const reducers = combineReducers({
   cardsById: cardsByIdReducer,
 });
 
-const store = createStore(reducers);
+const saveState = (state: State) => {
+  try {
+    const serializedState = JSON.stringify(state);
+    localStorage.setItem('state', serializedState);
+  } catch {
+    // ignore write errors
+  }
+};
+
+const loadState = () => {
+  try {
+    const serializedState = localStorage.getItem('state');
+    if (serializedState === null) {
+      return undefined;
+    }
+    return JSON.parse(serializedState);
+  } catch (err) {
+    return undefined;
+  }
+};
+
+const persistedState = loadState();
+const store = createStore(reducers, persistedState);
+
+store.subscribe(
+  throttle(() => {
+    saveState(store.getState());
+  }, 2000)
+);
 
 window.store = store;
 export type Store = typeof store;
