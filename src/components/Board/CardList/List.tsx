@@ -9,34 +9,48 @@ import { addCardToCards } from '../../../redux/actions/cardsByIdActions';
 import Card from './Card/Card';
 
 import './List.scss';
+import { useState, useMemo } from 'react';
 
-const List = ({ list, addCardToList, addCardToCards, ...props }: ListProps) => {
+const List = ({ list, addCardToList, addCardToCards }: ListProps) => {
+  const [addingItem, setAddingItem] = useState(false);
+
   const onAddCard = (title: string) => {
     const cardId = uuidv4();
     addCardToList(cardId, list.id);
     addCardToCards(cardId, title);
   };
 
-  const elements = list.cards.map((list, index) => (
-    <Card key={list} index={index} cardId={list} />
-  ));
+  const toggleAddingItem = () => {
+    setAddingItem((state) => !state);
+  };
+
+  const elements = useMemo(() => {
+    return list.cards.map((card, index) => (
+      <Card key={card} index={index} cardId={card} />
+    ));
+  }, [list.cards]);
 
   return (
     <div className="list">
       <h3>{list.title}</h3>
       <Droppable droppableId={list.id}>
         {(provided, snapshot) => (
-          <div
-            ref={provided.innerRef}
-            className="list-cards"
-            // isDraggingOver={snapshot.isDraggingOver}
-          >
+          <ul ref={provided.innerRef} className="list-cards">
             {elements}
-
             {provided.placeholder}
-
-            <AddItemForm addItem={onAddCard} />
-          </div>
+            {addingItem ? (
+              <AddItemForm
+                textareaClasses={['card']}
+                placeholder="Type card title"
+                addItem={onAddCard}
+                closeForm={toggleAddingItem}
+              />
+            ) : (
+              <div className="add-card__btn" onClick={toggleAddingItem}>
+                + <span>Create new card</span>
+              </div>
+            )}
+          </ul>
         )}
       </Droppable>
     </div>
@@ -45,7 +59,6 @@ const List = ({ list, addCardToList, addCardToCards, ...props }: ListProps) => {
 
 interface ListProps {
   list: ListType;
-  index: number;
   addCardToList: (cardId: string, listId: string) => void;
   addCardToCards: (id: string, title: string) => void;
 }

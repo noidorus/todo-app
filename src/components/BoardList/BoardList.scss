@@ -4,11 +4,39 @@
   gap: 10px;
 
   .item {
-    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border: 1px solid gray;
     border-radius: 5px;
     width: 19%;
-    height: 80px;
+    height: 86px;
+    transition: transform 0.2s linear;
+
+    &:has(.add-board__btn):hover,
+    &:has(a):hover {
+      transform: scale(0.985);
+    }
+
+    a,
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      height: 100%;
+    }
+  }
+
+  .add-board__btn {
+    border-radius: 5px;
+    background-color: rgba(12, 10, 10, 0.2);
+    cursor: pointer;
+    transition: all 0.2s linear;
+
+    &:hover {
+      background-color: rgba(12, 10, 10, 0.3);
+    }
   }
 }
 

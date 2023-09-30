@@ -1,24 +1,34 @@
 import { ChangeEvent, FormEvent, useState, KeyboardEvent } from 'react';
-
-import './AddItemForm.scss';
+import classNames from 'classnames';
 import { EditButtons } from '../EditButtons/EditButtons';
 
-const AddItemForm = ({ addItem }: NewBoardFormProps) => {
-  const [addingItem, setAddingItem] = useState(false);
+import './AddItemForm.scss';
+
+const AddItemForm = ({
+  addItem,
+  placeholder,
+  closeForm,
+  textareaClasses,
+}: NewBoardFormProps) => {
   const [title, setTitle] = useState('');
 
-  const onAddItem = (e: FormEvent) => {
+  const onAddItem = () => {
+    if (title.trim()) {
+      addItem(title);
+      setTitle('');
+      closeForm();
+    }
+  };
+
+  const onHandleSubmit = (e: FormEvent) => {
     e.preventDefault();
-    addItem(title);
-    setTitle('');
-    setAddingItem(false);
+    onAddItem();
   };
 
   const onEnter = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey && title.trim()) {
-      addItem(title);
-      setTitle('');
-      setAddingItem(false);
+    if (e.key === 'Enter') {
+      e.preventDefault();
+      onAddItem();
     }
   };
 
@@ -26,37 +36,35 @@ const AddItemForm = ({ addItem }: NewBoardFormProps) => {
     setTitle(e.target.value);
   };
 
-  const toggleAddingBoard = () => {
-    setAddingItem((state) => !state);
-    if (addingItem) {
-      setTitle('');
-    }
+  const onCLoseForm = () => {
+    closeForm();
+    setTitle('');
   };
 
-  return addingItem ? (
-    <form onSubmit={onAddItem} className="item add-board__form">
+  return (
+    <form onSubmit={onHandleSubmit} className="add-item__form">
       <textarea
-        placeholder="Type board title"
+        placeholder={placeholder}
         onChange={onChangeInputText}
         value={title}
         autoFocus
         onKeyDown={onEnter}
+        className={classNames(textareaClasses)}
       />
       <EditButtons
         disabled={!title.trim().length}
-        close={toggleAddingBoard}
+        close={onCLoseForm}
         name="Create"
       />
     </form>
-  ) : (
-    <div className="item add-board add-board__btn" onClick={toggleAddingBoard}>
-      Create new board
-    </div>
   );
 };
 
 interface NewBoardFormProps {
   addItem: (title: string) => void;
+  placeholder: string;
+  closeForm: () => void;
+  textareaClasses?: string[];
 }
 
 export default AddItemForm;

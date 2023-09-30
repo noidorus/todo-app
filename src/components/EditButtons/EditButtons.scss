@@ -6,10 +6,16 @@
   .edit-btn {
     cursor: pointer;
     width: 100%;
+  }
 
-    &-close {
-      cursor: pointer;
-      width: 25px;
+  .edit-btn-close {
+    cursor: pointer;
+    width: 25px;
+
+    transition: transform 0.2s linear;
+
+    &:hover {
+      transform: scale(1.2);
     }
   }
 }

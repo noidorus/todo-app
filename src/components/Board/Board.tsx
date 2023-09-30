@@ -5,11 +5,9 @@ import { connect } from 'react-redux';
 import { moveCard } from '../../redux/actions/listByIdActions';
 
 const Board = ({ lists, moveCard }: BoardProps) => {
-  const elements = lists.map((list, index) => (
-    <List key={list} index={index} listId={list} />
-  ));
+  const elements = lists.map((list) => <List key={list} listId={list} />);
 
-  const handleDragEnd = ({ source, destination, type }: DropResult) => {
+  const handleDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
 
     if (
