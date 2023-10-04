@@ -1,7 +1,7 @@
 import { KeyboardEvent, createRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { changeCardTitle } from '../../../../../../redux/actions/cardsByIdActions';
-import titleIcon from '../../../../../../assets/images/title-icon.svg';
+import { changeCardTitle } from '../../../redux/actions/cardsByIdActions';
+import titleIcon from '../../../assets/images/title-icon.svg';
 
 const CardModalHeader = (props: CardModalHeaderProps) => {
   const [title, setTitle] = useState(props.title);
@@ -29,7 +29,8 @@ const CardModalHeader = (props: CardModalHeaderProps) => {
 
   return (
     <div className="card-modal__header">
-      <img width={20} className="title-icon" src={titleIcon} alt="title-icon" />
+      <img width={20} className="icon" src={titleIcon} alt="title-icon" />
+      <h2 className="card-modal__title-assist">{title}</h2>
       <textarea
         ref={textareaRef}
         className="card-modal__title"

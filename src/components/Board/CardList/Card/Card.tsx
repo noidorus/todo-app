@@ -5,7 +5,7 @@ import { CardType } from '../../../../types';
 
 import './Card.scss';
 import { useModal } from '../../../Modal/ModalProvider';
-import { CardModal } from './CardModal/CardModal';
+import { CardModal } from '../../../CardModal/CardModal';
 
 const Card = ({ card, index }: CardProps) => {
   const { setModal } = useModal();

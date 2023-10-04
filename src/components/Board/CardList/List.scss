@@ -1,11 +1,16 @@
 .list {
   height: fit-content;
-  background-color: #dfe3e6;
+  background-color: #514538;
   border-radius: 10px;
 
   h3 {
     margin: 0;
+    color: aliceblue;
     padding: 10px;
+  }
+
+  .list-cards {
+    list-style: none;
   }
 
   .add-card__btn {

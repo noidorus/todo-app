@@ -1,12 +1,9 @@
 .add-item {
   &__form {
+    width: 100%;
     display: flex;
     flex-direction: column;
     gap: 4px;
     justify-content: center;
-
-    textarea {
-      min-width: 90%;
-    }
   }
 }

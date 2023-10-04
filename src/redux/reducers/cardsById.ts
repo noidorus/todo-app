@@ -4,6 +4,7 @@ import {
   ADD_CARD_TO_CARDS,
   CardsByIdActions,
   CHANGE_CARD_TITLE,
+  SET_CARD_DESC,
 } from '../actions/cardsByIdActions';
 
 interface CardsByIdState {
@@ -23,11 +24,18 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         comments: [],
       };
       return { ...state, [payload.id]: newCard };
-
     case CHANGE_CARD_TITLE:
       return {
         ...state,
         [payload.id]: { ...state[payload.id], title: payload.title },
+      };
+    case SET_CARD_DESC:
+      return {
+        ...state,
+        [payload.id]: {
+          ...state[payload.id],
+          description: payload.desc,
+        },
       };
     default:
       return state;

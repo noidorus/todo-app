@@ -8,8 +8,8 @@ import { addCardToList } from '../../../redux/actions/listByIdActions';
 import { addCardToCards } from '../../../redux/actions/cardsByIdActions';
 import Card from './Card/Card';
 
-import './List.scss';
 import { useState, useMemo } from 'react';
+import './List.scss';
 
 const List = ({ list, addCardToList, addCardToCards }: ListProps) => {
   const [addingItem, setAddingItem] = useState(false);

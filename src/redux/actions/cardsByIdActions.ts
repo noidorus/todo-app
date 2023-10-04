@@ -1,5 +1,6 @@
 export const ADD_CARD_TO_CARDS = 'ADD_CARD_TO_CARDS';
 export const CHANGE_CARD_TITLE = 'CHANGE_CARD_TITLE';
+export const SET_CARD_DESC = 'SET_CARD_DESC';
 
 export const addCardToCards = (id: string, title: string): AddCardToCards => ({
   type: ADD_CARD_TO_CARDS,
@@ -14,6 +15,11 @@ export const changeCardTitle = (
   payload: { id, title },
 });
 
+export const setCardDesc = (id: string, desc: string) => ({
+  type: SET_CARD_DESC,
+  payload: { id, desc },
+});
+
 interface AddCardToCards {
   type: typeof ADD_CARD_TO_CARDS;
   payload: { id: string; title: string };
@@ -23,4 +29,9 @@ interface ChangeCardTitle {
   payload: { id: string; title: string };
 }
 
-export type CardsByIdActions = AddCardToCards | ChangeCardTitle;
+interface SetCardDesc {
+  type: typeof SET_CARD_DESC;
+  payload: { id: string; desc: string };
+}
+
+export type CardsByIdActions = AddCardToCards | ChangeCardTitle | SetCardDesc;
