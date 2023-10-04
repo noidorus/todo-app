@@ -1,25 +1,58 @@
-import { createRef, useState } from 'react';
+import { createRef, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { CKEditor } from '@ckeditor/ckeditor5-react';
-import ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { setCardDesc } from '../../../redux/actions/cardsByIdActions';
 import { State } from '../../../redux/store';
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 import { DescriptionContent } from './DescriptionContent';
 import descIcon from '../../../assets/images/description-icon.svg';
+import { DescriptionEditor } from './DescriptionEditor';
+import {
+  setEditorContent,
+  setEditorVisible,
+} from '../../../redux/actions/editorActions';
 
-const Description = (props: DescriptionProps) => {
-  const [content, setContent] = useState(props.description);
-  const [editorVisible, setEditorVisible] = useState(false);
+const Description = ({
+  editorVisible,
+  id,
+  content,
+  setCardDesc,
+  description,
+  setEditorContent,
+  setEditorVisible,
+}: DescriptionProps) => {
   const descRef = createRef<HTMLDivElement>();
 
-  useOnClickOutside(descRef, () => {
+  const updateDescription = () => {
     setEditorVisible(false);
-    props.setCardDesc(props.id, content);
+    setCardDesc(id, content);
+  };
+
+  useOnClickOutside(descRef, (e) => {
+    const { classList } = e.target as HTMLElement;
+    if (
+      classList.contains('ck-link-form') ||
+      classList.contains('ck-button') ||
+      classList.contains('ck-icon') ||
+      classList.contains('ck-input')
+    ) {
+      return;
+    } else if (editorVisible) {
+      updateDescription();
+    }
   });
 
-  const onClickContent = () => {
-    setEditorVisible(true);
+  useEffect(() => {
+    setEditorContent(description);
+
+    return () => {
+      setEditorContent('');
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [description]);
+
+  const onClickCloseEditor = () => {
+    setEditorVisible(false);
+    setEditorContent(description);
   };
 
   return (
@@ -29,24 +62,19 @@ const Description = (props: DescriptionProps) => {
         <h3 className="description-title">Description</h3>
       </div>
 
-      <div
-        className="description-editor"
-        style={{ display: !editorVisible ? 'none' : 'block' }}
-      >
-        <CKEditor
-          editor={ClassicEditor}
-          data={content}
-          onChange={(event, editor) => {
-            setContent(editor.getData());
-          }}
+      {editorVisible ? (
+        <DescriptionEditor
+          onClickCloseEditor={onClickCloseEditor}
+          content={content}
+          setContent={setEditorContent}
+          onClickSaveDescription={updateDescription}
         />
-      </div>
-
-      <DescriptionContent
-        onClickContent={onClickContent}
-        description={props.description}
-        editorVisible={editorVisible}
-      />
+      ) : (
+        <DescriptionContent
+          description={description}
+          setEditorVisible={setEditorVisible}
+        />
+      )}
     </div>
   );
 };
@@ -54,12 +82,17 @@ const Description = (props: DescriptionProps) => {
 interface DescriptionProps {
   id: string;
   description: string;
+  editorVisible: boolean;
+  content: string;
   setCardDesc: (id: string, desc: string) => void;
+  setEditorVisible: (visible: boolean) => void;
+  setEditorContent: (content: string) => void;
 }
 
 export default connect(
-  ({ cardsById }: State, { id }: { id: string }) => ({
+  ({ cardsById, editor }: State, { id }: { id: string }) => ({
     description: cardsById[id].description,
+    ...editor,
   }),
-  { setCardDesc }
+  { setCardDesc, setEditorVisible, setEditorContent }
 )(Description);

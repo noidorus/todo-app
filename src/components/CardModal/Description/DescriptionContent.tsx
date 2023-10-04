@@ -5,16 +5,12 @@ export const DescriptionContent = (props: DescriptionContentProps) => {
   const handleClickContent = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
     if (target.tagName !== 'A') {
-      props.onClickContent();
+      props.setEditorVisible(true);
     }
   };
 
   return (
-    <div
-      style={{ display: props.editorVisible ? 'none' : 'block' }}
-      className="description-content"
-      onClick={handleClickContent}
-    >
+    <div className="description-content" onClick={handleClickContent}>
       {!!props.description ? (
         parse(props.description)
       ) : (
@@ -26,6 +22,5 @@ export const DescriptionContent = (props: DescriptionContentProps) => {
 
 interface DescriptionContentProps {
   description: string;
-  editorVisible: boolean;
-  onClickContent: () => void;
+  setEditorVisible: (visible: boolean) => void;
 }

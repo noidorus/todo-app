@@ -23,7 +23,9 @@ const BoardList = ({ boards, addBoard, createNewLists }: BoardsPageProps) => {
     return boards.map(({ title, id }) => (
       <CSSTransition key={id} timeout={500} classNames="board">
         <li className="item" key={id}>
-          <Link to={`/${id}`}>{title}</Link>
+          <Link className="item-link" to={`/${id}`}>
+            {title}
+          </Link>
         </li>
       </CSSTransition>
     ));

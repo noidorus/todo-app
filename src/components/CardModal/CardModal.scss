@@ -45,6 +45,14 @@
       top: 8px;
     }
   }
+
+  .edit-btns {
+    margin-top: 8px;
+  }
+}
+
+.ck-editor__editable_inline {
+  height: 300px;
 }
 
 .description-editor,
@@ -67,10 +75,6 @@
       text-decoration: underline;
     }
   }
-}
-
-.ck-editor__editable_inline {
-  height: 300px;
 }
 
 .description-content {

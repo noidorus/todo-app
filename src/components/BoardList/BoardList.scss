@@ -2,9 +2,12 @@
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  list-style: none;
 
   .add-item__form {
     padding: 0 10px;
+    background-color: rgba(12, 10, 10, 0.2);
+    height: 100%;
   }
 
   .add-board__btn {
@@ -28,13 +31,19 @@
   width: 19%;
   height: 86px;
   transition: transform 0.2s linear;
+
+  &-link {
+    color: aliceblue;
+    background-color: #514538;
+  }
+
   &:has(.add-board__btn):hover,
-  &:has(a):hover {
+  &:has(.item-link):hover {
     transform: scale(0.98);
   }
 
   a,
-  div {
+  .add-board__btn {
     display: flex;
     justify-content: center;
     align-items: center;

@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState, KeyboardEvent } from 'react';
+import { ChangeEvent, useState, KeyboardEvent } from 'react';
 import classNames from 'classnames';
 import { EditButtons } from '../EditButtons/EditButtons';
 
@@ -20,8 +20,7 @@ const AddItemForm = ({
     }
   };
 
-  const onHandleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const onClickBtn = () => {
     onAddItem();
   };
 
@@ -42,7 +41,7 @@ const AddItemForm = ({
   };
 
   return (
-    <form onSubmit={onHandleSubmit} className="add-item__form">
+    <div className="add-item__form">
       <textarea
         placeholder={placeholder}
         onChange={onChangeInputText}
@@ -52,11 +51,12 @@ const AddItemForm = ({
         className={classNames(textareaClasses)}
       />
       <EditButtons
-        disabled={!title.trim().length}
-        close={onCLoseForm}
+        onClickBtn={onClickBtn}
+        btnDisabled={!title.trim().length}
+        onClickClose={onCLoseForm}
         name="Create"
       />
-    </form>
+    </div>
   );
 };
 
