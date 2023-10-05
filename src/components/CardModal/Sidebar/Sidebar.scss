@@ -1,14 +1,15 @@
 .sidebar {
   float: right;
   width: 120px;
-  margin-left: 16px;
+  margin: 0 0 0 16px;
+  padding: 0;
+  list-style: none;
 
-  &-item {
-    padding: 4px 3px 4px 6px;
+  &__item {
     background-color: var(--bg-color_300);
     border-radius: 4px;
+    margin: 4px 0;
     position: relative;
-    cursor: pointer;
     transition: all 0.2s linear;
 
     &:hover {
@@ -16,50 +17,9 @@
     }
   }
 
-  .priority-selector {
-    box-shadow: -1px 1px 8px 2px rgba(0, 0, 0, 0.32);
-    background-color: var(--bg-color_200);
-    border: 1px solid var(--bg-color_500);
-    border-radius: 5px;
-    list-style: none;
-    position: absolute;
-    left: -75px;
-    top: -10px;
-    z-index: 1;
-    padding: 0;
-    margin: 0;
-  }
-
-  .selector-item {
-    position: relative;
-    padding: 2px 28px;
-    transition: all 0.3s linear;
-    color: white;
-    background-color: var(--bg-color_500);
-
-    &:first-child {
-      border-radius: 4px 4px 0 0;
-    }
-
-    &:last-child {
-      border-radius: 0 0 4px 4px;
-    }
-
-    &:hover {
-      background-color: var(--bg-color_500-hover);
-    }
-
-    &::before {
-      content: url('../../../assets/images/checkmark-outline.svg');
-      position: absolute;
-      width: 16px;
-      left: 8px;
-      top: 3px;
-      visibility: hidden;
-    }
-
-    &.checked::before {
-      visibility: visible;
-    }
+  &__item-name {
+    padding: 4px 3px 4px 6px;
+    display: block;
+    cursor: pointer;
   }
 }

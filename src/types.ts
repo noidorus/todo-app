@@ -16,4 +16,8 @@ export interface CardType {
   description: string;
   comments: string[];
   priority: string;
+  date: {
+    createdDate: number;
+    endDate: number | null;
+  };
 }
