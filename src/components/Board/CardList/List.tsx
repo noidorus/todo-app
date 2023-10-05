@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { Droppable } from 'react-beautiful-dnd';
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
 import { State } from '../../../redux/store';
 import type { ListType } from '../../../types';
 import AddItemForm from '../../AddItemForm/AddItemForm';
@@ -8,14 +8,19 @@ import { addCardToList } from '../../../redux/actions/listByIdActions';
 import { addCardToCards } from '../../../redux/actions/cardsByIdActions';
 import Card from './Card/Card';
 
-import { useState, useMemo } from 'react';
+import { useState, useMemo, createRef } from 'react';
 import './List.scss';
+import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 
 const List = ({ list, addCardToList, addCardToCards }: ListProps) => {
   const [addingItem, setAddingItem] = useState(false);
+  const listRef = createRef<HTMLDivElement>();
+  useOnClickOutside(listRef, () => {
+    setAddingItem(false);
+  });
 
   const onAddCard = (title: string) => {
-    const cardId = uuidv4();
+    const cardId = nanoid(10);
     addCardToList(cardId, list.id);
     addCardToCards(cardId, title);
   };
@@ -31,7 +36,7 @@ const List = ({ list, addCardToList, addCardToCards }: ListProps) => {
   }, [list.cards]);
 
   return (
-    <div className="list">
+    <div className="list" ref={listRef}>
       <h3>{list.title}</h3>
       <Droppable droppableId={list.id}>
         {(provided, snapshot) => (

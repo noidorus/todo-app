@@ -1,10 +1,11 @@
 import { Reducer } from 'redux';
 import { CardType } from '../../types';
 import {
-  ADD_CARD_TO_CARDS,
   CardsByIdActions,
+  ADD_CARD_TO_CARDS,
   CHANGE_CARD_TITLE,
   SET_CARD_DESC,
+  SET_PRIORITY_SELECTOR,
 } from '../actions/cardsByIdActions';
 
 interface CardsByIdState {
@@ -18,9 +19,9 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
   switch (type) {
     case ADD_CARD_TO_CARDS:
       const newCard = {
-        id: payload.id,
-        title: payload.title,
+        ...payload,
         description: '',
+        priority: '±0',
         comments: [],
       };
       return { ...state, [payload.id]: newCard };
@@ -36,6 +37,11 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
           ...state[payload.id],
           description: payload.desc,
         },
+      };
+    case SET_PRIORITY_SELECTOR:
+      return {
+        ...state,
+        [payload.id]: { ...state[payload.id], priority: payload.priority },
       };
     default:
       return state;

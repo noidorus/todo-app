@@ -1,0 +1,70 @@
+.description {
+  width: 550px;
+  float: left;
+
+  &-title__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px 0 15px 50px;
+
+    .icon {
+      position: absolute;
+      left: 14px;
+      top: 8px;
+    }
+  }
+
+  &-editor,
+  &-content {
+    margin-left: 50px;
+
+    h2 {
+      margin-top: 28px;
+    }
+    h3 {
+      margin-top: 24px;
+    }
+    h4 {
+      margin-top: 20px;
+    }
+    & > :first-child {
+      margin: 0;
+    }
+    a {
+      color: rgb(85, 26, 139);
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+
+  &-content {
+    max-height: 300px;
+    overflow-y: scroll;
+    overflow-wrap: break-word;
+    word-break: break-word;
+    cursor: pointer;
+
+    .content-empty {
+      background-color: var(--bg-color_300);
+      padding: 6px 0 0 6px;
+      border-radius: 5px;
+      min-height: 50px;
+      transition: background-color 0.3s linear;
+
+      &:hover {
+        background-color: var(--bg-color_300-hover);
+      }
+    }
+  }
+
+  .edit-btns {
+    margin-top: 8px;
+  }
+}
+
+.ck-editor__editable_inline {
+  height: 300px;
+}

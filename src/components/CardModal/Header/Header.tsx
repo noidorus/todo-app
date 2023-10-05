@@ -6,7 +6,6 @@ import { State } from '../../../redux/store';
 
 const CardModalHeader = (props: CardModalHeaderProps) => {
   const [title, setTitle] = useState(props.title);
-
   const textareaRef = createRef<HTMLTextAreaElement>();
   const onHandleBlur = () => {
     changeCardTitle();

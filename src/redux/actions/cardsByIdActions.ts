@@ -1,6 +1,7 @@
 export const ADD_CARD_TO_CARDS = 'ADD_CARD_TO_CARDS';
 export const CHANGE_CARD_TITLE = 'CHANGE_CARD_TITLE';
 export const SET_CARD_DESC = 'SET_CARD_DESC';
+export const SET_PRIORITY_SELECTOR = 'SET_PRIORITY_SELECTOR';
 
 export const addCardToCards = (id: string, title: string): AddCardToCards => ({
   type: ADD_CARD_TO_CARDS,
@@ -20,6 +21,14 @@ export const setCardDesc = (id: string, desc: string) => ({
   payload: { id, desc },
 });
 
+export const setPrioritySelector = (
+  id: string,
+  priority: string
+): SetPrioritySelector => ({
+  type: SET_PRIORITY_SELECTOR,
+  payload: { id, priority },
+});
+
 interface AddCardToCards {
   type: typeof ADD_CARD_TO_CARDS;
   payload: { id: string; title: string };
@@ -28,10 +37,17 @@ interface ChangeCardTitle {
   type: typeof CHANGE_CARD_TITLE;
   payload: { id: string; title: string };
 }
-
 interface SetCardDesc {
   type: typeof SET_CARD_DESC;
   payload: { id: string; desc: string };
 }
+interface SetPrioritySelector {
+  type: typeof SET_PRIORITY_SELECTOR;
+  payload: { id: string; priority: string };
+}
 
-export type CardsByIdActions = AddCardToCards | ChangeCardTitle | SetCardDesc;
+export type CardsByIdActions =
+  | AddCardToCards
+  | ChangeCardTitle
+  | SetCardDesc
+  | SetPrioritySelector;

@@ -1,6 +1,6 @@
 import { ChangeEvent, useState, KeyboardEvent } from 'react';
 import classNames from 'classnames';
-import { EditButtons } from '../EditButtons/EditButtons';
+import { EditButtons } from '../Buttons/EditButtons/EditButtons';
 
 import './AddItemForm.scss';
 

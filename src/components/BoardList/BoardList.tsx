@@ -2,9 +2,9 @@ import { Link } from 'react-router-dom';
 import { useState, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { CSSTransition, TransitionGroup } from 'react-transition-group';
-import { v4 as uuidv4 } from 'uuid';
+import { nanoid } from 'nanoid';
 import { State } from '../../redux/store';
-import { addBoard } from '../../redux/reducers/boardsReducer';
+import { addBoard } from '../../redux/actions/boardsActions';
 import { createNewLists } from '../../redux/actions/listByIdActions';
 import { BoardType } from '../../types';
 import AddItemForm from '../AddItemForm/AddItemForm';
@@ -14,8 +14,8 @@ import './BoardList.scss';
 const BoardList = ({ boards, addBoard, createNewLists }: BoardsPageProps) => {
   const [addingItem, setAddingItem] = useState(false);
   const onAddBoard = (title: string) => {
-    const newLists = [uuidv4(), uuidv4(), uuidv4()];
-    addBoard({ id: uuidv4(), title, lists: newLists });
+    const newLists = [nanoid(10), nanoid(10), nanoid(10)];
+    addBoard({ id: nanoid(10), title, lists: newLists });
     createNewLists(newLists);
   };
 

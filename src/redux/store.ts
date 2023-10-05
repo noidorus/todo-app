@@ -1,7 +1,7 @@
 import { legacy_createStore as createStore, combineReducers } from 'redux';
 import { boardsReducer } from './reducers/boardsReducer';
 import { listsByIdReducer } from './reducers/listsById';
-import { cardsByIdReducer } from './reducers/cardsById';
+import { cardsByIdReducer } from './reducers/cardsByIdReducer';
 import { throttle } from '../helpers/helpers';
 import { editorReducer } from './reducers/editorResucer';
 

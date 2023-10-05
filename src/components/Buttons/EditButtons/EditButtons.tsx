@@ -1,4 +1,4 @@
-import CloseIcon from '../../assets/images/close-outline.svg';
+import CloseIcon from '../../../assets/images/close-outline.svg';
 import './EditButtons.scss';
 
 export const EditButtons = ({

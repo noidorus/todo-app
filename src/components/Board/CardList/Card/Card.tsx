@@ -2,10 +2,11 @@ import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 import { State } from '../../../../redux/store';
 import { CardType } from '../../../../types';
-
-import './Card.scss';
 import { useModal } from '../../../Modal/ModalProvider';
 import { CardModal } from '../../../CardModal/CardModal';
+
+import './Card.scss';
+import { CardBadges } from './CardBadges';
 
 const Card = ({ card, index }: CardProps) => {
   const { setModal } = useModal();
@@ -21,10 +22,12 @@ const Card = ({ card, index }: CardProps) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          className="card"
           onClick={onHandleClick}
         >
-          <h4 className="card__title">{card.title}</h4>
+          <div className="card">
+            <h4 className="card__title">{card.title}</h4>
+            <CardBadges {...card} />
+          </div>
         </li>
       )}
     </Draggable>

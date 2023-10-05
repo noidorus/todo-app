@@ -1,23 +1,24 @@
 .board__list {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 20px;
   list-style: none;
 
   .add-item__form {
     padding: 0 10px;
-    background-color: rgba(12, 10, 10, 0.2);
+    border-radius: 5px;
+    background-color: rgba(12, 10, 10, 0.3);
     height: 100%;
   }
 
   .add-board__btn {
     border-radius: 5px;
-    background-color: rgba(12, 10, 10, 0.2);
+    background-color: rgba(12, 10, 10, 0.3);
     cursor: pointer;
     transition: all 0.2s linear;
 
     &:hover {
-      background-color: rgba(12, 10, 10, 0.3);
+      background-color: rgba(12, 10, 10, 0.2);
     }
   }
 }
@@ -26,15 +27,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid gray;
   border-radius: 5px;
   width: 19%;
   height: 86px;
-  transition: transform 0.2s linear;
+  transition: transform 0.3s linear;
+
+  // &:hover .item-link {
+  //   background-color: #514538c9;
+  // }
 
   &-link {
     color: aliceblue;
-    background-color: #514538;
+    border-radius: 5px;
+    background-color: var(--bg-color_500);
+    transition: all 0.3s linear;
+
+    &:hover {
+      background-color: var(--bg-color_500-hover);
+    }
   }
 
   &:has(.add-board__btn):hover,
@@ -42,7 +52,7 @@
     transform: scale(0.98);
   }
 
-  a,
+  &-link,
   .add-board__btn {
     display: flex;
     justify-content: center;

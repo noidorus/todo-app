@@ -15,7 +15,11 @@
       background-color: rgba(0, 217, 137, 0.3);
     }
 
-    &:hover {
+    &:not([disabled]) {
+      box-shadow: -1px 1px 8px 1px rgba(0, 0, 0, 0.32);
+    }
+
+    &:not([disabled]):hover {
       transform: scale(0.98);
       background-color: #02ffa2;
     }

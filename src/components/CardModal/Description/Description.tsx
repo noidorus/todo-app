@@ -11,6 +11,9 @@ import {
   setEditorVisible,
 } from '../../../redux/actions/editorActions';
 
+import './Description.scss';
+import { Button } from '../../Buttons/Button/Button';
+
 const Description = ({
   editorVisible,
   id,
@@ -56,10 +59,13 @@ const Description = ({
   };
 
   return (
-    <div className="card-modal__description" ref={descRef}>
+    <div className="description" ref={descRef}>
       <div className="description-title__wrapper">
         <img className="icon" width={20} src={descIcon} alt="desc-icon" />
         <h3 className="description-title">Description</h3>
+        {!!description && !editorVisible && (
+          <Button name="Edit" onCLick={() => setEditorVisible(true)} />
+        )}
       </div>
 
       {editorVisible ? (

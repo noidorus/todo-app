@@ -1,7 +1,6 @@
 import { Reducer } from 'redux';
 import { BoardType } from '../../types';
-
-const ADD_BOARD = 'ADD_BOARD';
+import { ADD_BOARD, BoardsActions } from '../actions/boardsActions';
 
 const initialState: BoardsState = {
   boards: [],
@@ -18,34 +17,8 @@ export const boardsReducer: Reducer<BoardsState, BoardsActions> = (
   // debugger;
   switch (type) {
     case ADD_BOARD:
-      const newBoard = {
-        id: payload.id,
-        title: payload.title,
-        lists: payload.lists,
-      };
-
-      return {
-        ...state,
-        boards: [newBoard, ...state.boards],
-      };
+      return { ...state, boards: [{ ...payload }, ...state.boards] };
     default:
       return state;
   }
 };
-
-export const addBoard = (newBoard: NewBoard): CreateNewBoard => ({
-  type: ADD_BOARD,
-  payload: newBoard,
-});
-
-interface CreateNewBoard {
-  type: typeof ADD_BOARD;
-  payload: NewBoard;
-}
-interface NewBoard {
-  id: string;
-  title: string;
-  lists: string[];
-}
-
-type BoardsActions = CreateNewBoard;

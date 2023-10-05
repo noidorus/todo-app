@@ -2,12 +2,23 @@
   margin: 6px 10px;
   padding: 5px;
   border-radius: 5px;
-  border: 1px solid #b8a99a;
-  background-color: #b8a99a;
-  box-shadow: 0 1px 0 rgba(9, 45, 66, 0.25);
+  background-color: var(--bg-color_200);
+  box-shadow: inset -7px -7px 14px #9c9083, inset 7px 7px 14px #d4c2b1;
+  cursor: pointer;
 
   &__title {
     font-weight: 500;
-    cursor: pointer;
   }
+
+  &__badges {
+    display: flex;
+    align-items: center;
+  }
+}
+
+.card__badges {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 16px;
 }

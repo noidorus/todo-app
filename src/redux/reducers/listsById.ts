@@ -17,23 +17,20 @@ export const listsByIdReducer: Reducer<ListbyIdState, ListByIdActions> = (
 ) => {
   switch (type) {
     case CREATE_NEW_LISTS:
-      const newLists = {
-        [payload[0]]: {
-          id: payload[0],
-          title: 'Queue',
-          cards: [],
+      const newLists = ['Queue', 'Development', 'Done'].reduce(
+        (acc, val, i) => {
+          return {
+            ...acc,
+            [payload[i]]: {
+              id: payload[i],
+              title: val,
+              cards: [],
+            },
+          };
         },
-        [payload[1]]: {
-          id: payload[1],
-          title: 'Development',
-          cards: [],
-        },
-        [payload[2]]: {
-          id: payload[2],
-          title: 'Done',
-          cards: [],
-        },
-      };
+        {}
+      );
+
       return { ...state, ...newLists };
     case ADD_CARD_TO_LIST:
       const { cardId, listId } = payload;
