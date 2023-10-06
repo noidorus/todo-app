@@ -9,12 +9,13 @@
   &__title {
     font-weight: 500;
   }
-}
 
-.card__badges {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 4px;
-  font-size: 14px;
+  &__badges {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 7px;
+    font-size: 13px;
+    margin-top: 3px;
+  }
 }

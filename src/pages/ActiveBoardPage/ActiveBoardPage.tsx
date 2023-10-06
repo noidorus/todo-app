@@ -23,9 +23,7 @@ const ActiveBoardPage = ({ boards }: ActiveBoardPageProps) => {
   );
 };
 
-export default connect(({ boards }: State) => ({
-  boards: boards.boards,
-}))(ActiveBoardPage);
+export default connect(({ boards }: State) => ({ ...boards }))(ActiveBoardPage);
 
 interface ActiveBoardPageProps {
   boards: BoardType[];

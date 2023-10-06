@@ -1,0 +1,18 @@
+.date-badge {
+  position: relative;
+  padding: 2px 0 2px 22px;
+
+  &::before {
+    content: url('../../../assets/images/time-outline.svg');
+    width: 17px;
+    position: absolute;
+    left: 2px;
+    top: 1px;
+  }
+
+  &.date-timeout {
+    padding: 2px 3px 2px 22px;
+    border-radius: 4px;
+    background-color: red;
+  }
+}

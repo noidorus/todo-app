@@ -94,6 +94,7 @@ export const DatePickerPopUp = ({
 
       <EditButtons
         name="Save"
+        btnDisabled={!!error}
         onClickBtn={onClickSave}
         onClickClose={onClickClose}
       />

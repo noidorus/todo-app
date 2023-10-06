@@ -10,8 +10,8 @@ export const CardBadges = ({
   return (
     <div className="card__badges">
       <DateBadge date={date} />
-      {description && <img src={descIcon} width={18} alt="desc-icon" />}
       <PriorityBadge priority={priority} />
+      {description && <img src={descIcon} width={18} alt="desc-icon" />}
     </div>
   );
 };
