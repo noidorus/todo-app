@@ -5,6 +5,7 @@ export const SET_PRIORITY_SELECTOR = 'SET_PRIORITY_SELECTOR';
 export const CHANGE_END_DATE = 'CHANGE_END_DATE';
 export const ADD_TASK = 'ADD_TASK';
 export const CHANGE_TASK_STATUS = 'CHANGE_TASK_STATUS';
+export const DELETE_TASK = 'DELETE_TASK';
 
 export const addCardToCards = (id: string, title: string): AddCardToCards => ({
   type: ADD_CARD_TO_CARDS,
@@ -58,6 +59,11 @@ export const changeTaskStatus = (
   payload: { id, taskId, checked },
 });
 
+export const deleteTask = (id: string, taskId: string): DeleteTask => ({
+  type: DELETE_TASK,
+  payload: { id, taskId },
+});
+
 interface AddCardToCards {
   type: typeof ADD_CARD_TO_CARDS;
   payload: { id: string; title: string };
@@ -87,6 +93,11 @@ interface ChangeTaskStatus {
   payload: { id: string; taskId: string; checked: boolean };
 }
 
+interface DeleteTask {
+  type: typeof DELETE_TASK;
+  payload: { id: string; taskId: string };
+}
+
 export type CardsByIdActions =
   | AddCardToCards
   | ChangeCardTitle
@@ -94,4 +105,5 @@ export type CardsByIdActions =
   | SetPrioritySelector
   | ChangeEndDate
   | AddTask
-  | ChangeTaskStatus;
+  | ChangeTaskStatus
+  | DeleteTask;

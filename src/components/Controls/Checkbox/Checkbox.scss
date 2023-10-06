@@ -12,6 +12,7 @@
   position: absolute;
   display: grid;
   place-content: center;
+  cursor: pointer;
 
   &::before {
     content: '';

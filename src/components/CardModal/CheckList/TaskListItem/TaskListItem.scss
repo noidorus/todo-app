@@ -4,7 +4,7 @@
 
   .checkbox {
     left: -29px;
-    top: 5px;
+    top: 9px;
   }
 
   &.checked {
@@ -12,17 +12,48 @@
       text-decoration: line-through;
     }
   }
+}
+
+.task-item-controls-and-text {
+  width: 100%;
+  padding: 4px 5px;
+  border-radius: 4px;
+  display: inline-flex;
+  cursor: pointer;
+  transition: background-color 0.2s linear;
+
+  &:hover {
+    background-color: var(--bg-color_300);
+    .delete-btn {
+      visibility: visible;
+    }
+  }
 
   .task-title {
     display: block;
-    padding: 4px 5px;
-    border-radius: 4px;
+    align-self: center;
+    flex: 1;
+  }
+
+  .delete-btn {
+    border: none;
+    visibility: hidden;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    float: right;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
     cursor: pointer;
 
-    transition: background-color 0.3s linear;
-
     &:hover {
-      background-color: var(--bg-color_300);
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+
+    img {
+      width: 16px;
     }
   }
 }

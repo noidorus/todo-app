@@ -9,6 +9,7 @@ import {
   CHANGE_END_DATE,
   ADD_TASK,
   CHANGE_TASK_STATUS,
+  DELETE_TASK,
 } from '../actions/cardsByIdActions';
 
 interface CardsByIdState {
@@ -83,6 +84,17 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
               checked: payload.checked,
             },
           },
+        },
+      };
+    case DELETE_TASK:
+      const taskList = { ...state[payload.id].taskList };
+      delete taskList[payload.taskId];
+
+      return {
+        ...state,
+        [payload.id]: {
+          ...state[payload.id],
+          taskList: taskList,
         },
       };
     default:

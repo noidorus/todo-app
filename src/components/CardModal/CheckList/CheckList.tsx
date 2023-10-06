@@ -9,6 +9,7 @@ import { TaskType } from '../../../types';
 import {
   addTask,
   changeTaskStatus,
+  deleteTask,
 } from '../../../redux/actions/cardsByIdActions';
 import { nanoid } from 'nanoid';
 import './CheckList.scss';
@@ -18,6 +19,7 @@ const CheckList = ({
   addTask,
   id,
   changeTaskStatus,
+  deleteTask,
 }: CheckListProps) => {
   const [addingTask, setAddingTask] = useState(false);
 
@@ -25,11 +27,16 @@ const CheckList = ({
     changeTaskStatus(id, taskId, checked);
   };
 
+  const onDeleteTask = (taskId: string) => {
+    deleteTask(id, taskId);
+  };
+
   const elements = useMemo(() => {
     return Object.values(taskList).map((task) => (
       <TaskListItem
         onChangeCheckbox={onChangeCheckbox}
         key={task.id}
+        deleteTask={onDeleteTask}
         {...task}
       />
     ));
@@ -73,7 +80,7 @@ export default connect(
   ({ cardsById }: State, { id }: { id: string }) => ({
     taskList: cardsById[id].taskList,
   }),
-  { addTask, changeTaskStatus }
+  { addTask, changeTaskStatus, deleteTask }
 )(CheckList);
 
 interface CheckListProps {
@@ -83,4 +90,5 @@ interface CheckListProps {
   };
   addTask: (id: string, taskId: string, title: string) => void;
   changeTaskStatus: (id: string, taskId: string, checked: boolean) => void;
+  deleteTask: (id: string, taskId: string) => void;
 }
