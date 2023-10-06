@@ -28,10 +28,11 @@ export const SidebarButtonLayout = ({
     <li className="sidebar__item" ref={itemRef}>
       <span
         className="sidebar__item-name"
-        onClick={() => setChildrenVisible(true)}
+        onClick={() => setChildrenVisible((state) => !state)}
       >
         {name}
       </span>
+
       {childrenVisible && renderChildren()}
     </li>
   );

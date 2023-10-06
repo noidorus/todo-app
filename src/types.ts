@@ -9,7 +9,7 @@ export interface ListType {
   title: string;
   cards: string[];
 }
-export interface CheckListType {
+export interface TaskType {
   id: string;
   title: string;
   checked: boolean;
@@ -21,8 +21,8 @@ export interface CardType {
   description: string;
   comments: string[];
   priority: string;
-  checkList: {
-    [key: string]: CheckListType;
+  taskList: {
+    [key: string]: TaskType;
   };
   date: {
     createdDate: number;

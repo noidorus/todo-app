@@ -1,13 +1,23 @@
+import classNames from 'classnames';
 import { Checkbox } from '../../../Controls/Checkbox/Checkbox';
 import './TaskListItem.scss';
 
-const TaskListItem = ({ checked, title }: TaskListItemProps) => {
-  // const onChange;
+const TaskListItem = (props: TaskListItemProps) => {
+  const onChangeCheckbox = (checked: boolean) => {
+    props.onChangeCheckbox(props.id, checked);
+  };
+
+  const classes = classNames({
+    'task-list__item': true,
+    checked: props.checked,
+  });
 
   return (
-    <li className="task-list__item">
-      {/* <Checkbox /> */}
-      <span className="task-title">{title}</span>
+    <li className={classes}>
+      <Checkbox onChange={onChangeCheckbox} checked={props.checked} />
+      <div className="task-item-controls-and-text">
+        <span className="task-title">{props.title}</span>
+      </div>
     </li>
   );
 };
@@ -18,4 +28,5 @@ interface TaskListItemProps {
   id: string;
   checked: boolean;
   title: string;
+  onChangeCheckbox: (taskId: string, checked: boolean) => void;
 }

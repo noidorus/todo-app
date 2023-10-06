@@ -7,6 +7,12 @@
     top: 5px;
   }
 
+  &.checked {
+    .task-title {
+      text-decoration: line-through;
+    }
+  }
+
   .task-title {
     display: block;
     padding: 4px 5px;

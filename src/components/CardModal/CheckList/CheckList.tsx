@@ -1,21 +1,40 @@
 import { connect } from 'react-redux';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import { State } from '../../../redux/store';
 import checkBoxIcon from '../../../assets/images/checkbox-outline.svg';
 import { Button } from '../../Controls/Button/Button';
 import TaskListItem from './TaskListItem/TaskListItem';
 import AddItemForm from '../../AddItemForm/AddItemForm';
-import { CheckListType } from '../../../types';
-import { addTask } from '../../../redux/actions/cardsByIdActions';
+import { TaskType } from '../../../types';
+import {
+  addTask,
+  changeTaskStatus,
+} from '../../../redux/actions/cardsByIdActions';
 import { nanoid } from 'nanoid';
 import './CheckList.scss';
 
-const CheckList = ({ checkList, addTask, id }: CheckListProps) => {
+const CheckList = ({
+  taskList,
+  addTask,
+  id,
+  changeTaskStatus,
+}: CheckListProps) => {
   const [addingTask, setAddingTask] = useState(false);
 
-  const elements = Object.values(checkList).map((task) => (
-    <TaskListItem key={task.id} {...task} />
-  ));
+  const onChangeCheckbox = (taskId: string, checked: boolean) => {
+    changeTaskStatus(id, taskId, checked);
+  };
+
+  const elements = useMemo(() => {
+    return Object.values(taskList).map((task) => (
+      <TaskListItem
+        onChangeCheckbox={onChangeCheckbox}
+        key={task.id}
+        {...task}
+      />
+    ));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [taskList]);
 
   const onAddTask = (title: string) => {
     addTask(id, nanoid(), title);
@@ -52,15 +71,16 @@ const CheckList = ({ checkList, addTask, id }: CheckListProps) => {
 
 export default connect(
   ({ cardsById }: State, { id }: { id: string }) => ({
-    checkList: cardsById[id].checkList,
+    taskList: cardsById[id].taskList,
   }),
-  { addTask }
+  { addTask, changeTaskStatus }
 )(CheckList);
 
 interface CheckListProps {
   id: string;
-  checkList: {
-    [key: string]: CheckListType;
+  taskList: {
+    [key: string]: TaskType;
   };
   addTask: (id: string, taskId: string, title: string) => void;
+  changeTaskStatus: (id: string, taskId: string, checked: boolean) => void;
 }
