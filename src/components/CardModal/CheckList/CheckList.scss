@@ -2,6 +2,7 @@
   &__title-wrapper {
     padding: 0 0 0 50px;
     position: relative;
+    margin-bottom: 4px;
 
     .icon {
       position: absolute;
@@ -14,6 +15,7 @@
     margin: 0;
     list-style: none;
     padding-left: 50px;
+    min-height: 8px;
   }
 
   .add-item__wrapper {

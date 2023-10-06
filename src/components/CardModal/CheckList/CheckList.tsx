@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import { useMemo, useState } from 'react';
 import { State } from '../../../redux/store';
 import checkBoxIcon from '../../../assets/images/checkbox-outline.svg';
-import { Button } from '../../Controls/Button/Button';
+import { Button } from '../../Commons/Button/Button';
 import TaskListItem from './TaskListItem/TaskListItem';
 import AddItemForm from '../../AddItemForm/AddItemForm';
 import { TaskType } from '../../../types';
@@ -13,6 +13,7 @@ import {
 } from '../../../redux/actions/cardsByIdActions';
 import { nanoid } from 'nanoid';
 import './CheckList.scss';
+import { ProgressBar } from '../../Commons/ProgressBar/ProgressBar';
 
 const CheckList = ({
   taskList,
@@ -30,9 +31,17 @@ const CheckList = ({
   const onDeleteTask = (taskId: string) => {
     deleteTask(id, taskId);
   };
+  const taskItems = useMemo(() => Object.values(taskList), [taskList]);
+  const completed = useMemo(() => {
+    const completedLentgh = taskItems.filter(({ checked }) => checked).length;
+    if (taskItems.length === 0) {
+      return 0;
+    }
+    return Math.floor((100 / taskItems.length) * completedLentgh);
+  }, [taskItems]);
 
   const elements = useMemo(() => {
-    return Object.values(taskList).map((task) => (
+    return taskItems.map((task) => (
       <TaskListItem
         onChangeCheckbox={onChangeCheckbox}
         key={task.id}
@@ -41,7 +50,7 @@ const CheckList = ({
       />
     ));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [taskList]);
+  }, [taskItems]);
 
   const onAddTask = (title: string) => {
     addTask(id, nanoid(), title);
@@ -58,6 +67,7 @@ const CheckList = ({
           className="icon"
         />
       </div>
+      <ProgressBar completed={completed} />
 
       <ul className="task-list">{elements}</ul>
 

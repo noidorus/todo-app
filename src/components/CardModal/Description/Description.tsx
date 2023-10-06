@@ -12,7 +12,7 @@ import {
 } from '../../../redux/actions/editorActions';
 
 import './Description.scss';
-import { Button } from '../../Controls/Button/Button';
+import { Button } from '../../Commons/Button/Button';
 
 const Description = ({
   editorVisible,

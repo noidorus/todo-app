@@ -1,10 +1,10 @@
 import { FocusEvent, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { DateTime } from 'luxon';
-import { EditButtons } from '../../../Controls/EditButtons/EditButtons';
+import { EditButtons } from '../../../Commons/EditButtons/EditButtons';
 
 import './DatePickerPopUp.scss';
-import { Checkbox } from '../../../Controls/Checkbox/Checkbox';
+import { Checkbox } from '../../../Commons/Checkbox/Checkbox';
 
 export const DatePickerPopUp = ({
   id,
