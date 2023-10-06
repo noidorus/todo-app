@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+
 import './PriorityBadge.scss';
 
 export const PriorityBadge = ({ priority }: PriorityBadgeProps) => {

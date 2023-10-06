@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
 import { State } from '../../../redux/store';
-import { PriorityBadge } from '../../Badges/PriorityBadge';
+import { PriorityBadge } from '../../Badges/PriorityBadge/PriorityBadge';
 
 import './Badges.scss';
 

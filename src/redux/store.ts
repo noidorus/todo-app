@@ -39,7 +39,7 @@ const store = createStore(reducers, persistedState);
 store.subscribe(
   throttle(() => {
     saveState(store.getState());
-  }, 2000)
+  }, 1000)
 );
 
 window.store = store;

@@ -9,16 +9,12 @@
   &__title {
     font-weight: 500;
   }
-
-  &__badges {
-    display: flex;
-    align-items: center;
-  }
 }
 
 .card__badges {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  gap: 3px;
-  font-size: 16px;
+  gap: 4px;
+  font-size: 14px;
 }

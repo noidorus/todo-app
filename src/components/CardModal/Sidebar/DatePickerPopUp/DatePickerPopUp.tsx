@@ -1,9 +1,9 @@
 import { FocusEvent, useState } from 'react';
 import DatePicker from 'react-datepicker';
-import { isValid } from 'date-fns';
+import { DateTime } from 'luxon';
+import { EditButtons } from '../../../Buttons/EditButtons/EditButtons';
 
 import './DatePickerPopUp.scss';
-import { EditButtons } from '../../../Buttons/EditButtons/EditButtons';
 
 export const DatePickerPopUp = ({
   id,
@@ -14,15 +14,20 @@ export const DatePickerPopUp = ({
   const [endDate, setEndDate] = useState<Date>(
     date.endDate ? new Date(date.endDate) : new Date()
   );
-  const [error, setError] = useState(false);
+  const [error, setError] = useState('');
   const [checkboxChecked, setCheckboxChecked] = useState(true);
 
   const onHandleChangeRaw = ({ target }: FocusEvent<HTMLInputElement>) => {
-    const dateRegex = /^\d{2}\/\d{2}\/\d{4}$/;
-    const validRegex = dateRegex.test(target.value);
-    const validDate = isValid(new Date(target.value));
-    if (validRegex || validDate) {
-      setError(true);
+    const currDate = DateTime.fromFormat(target.value, 'dd/MM/yyyy');
+    const createdDate = DateTime.fromMillis(date.createdDate);
+    const diff = currDate.diff(createdDate, 'days').days;
+
+    if (!currDate.isValid) {
+      setError('Write date in format: dd/MM/yyyy');
+    } else if (diff < -1) {
+      setError(`Min date: ${createdDate.toFormat('dd/MM/yyyy')}`);
+    } else {
+      setError('');
     }
   };
 
@@ -50,14 +55,18 @@ export const DatePickerPopUp = ({
         onChange={(date) => {
           if (date) setEndDate(date);
         }}
+        minDate={new Date()}
+        dateFormat="dd/MM/yyyy"
       />
-      <div className="error">{error && 'Invalid date format: mm/dd/yyyy'}</div>
+
+      <div className="error">{error}</div>
 
       <div>Date of creation:</div>
       <DatePicker
         readOnly
         className="start-date"
         selected={new Date(date.createdDate)}
+        dateFormat="dd/MM/yyyy"
         onChange={(date) => {
           if (date) setEndDate(date);
         }}
@@ -75,6 +84,7 @@ export const DatePickerPopUp = ({
           onChangeRaw={onHandleChangeRaw}
           calendarClassName="date-picker__input"
           autoFocus
+          dateFormat="dd/MM/yyyy"
           selected={endDate}
           onChange={(date) => {
             if (date) setEndDate(date);

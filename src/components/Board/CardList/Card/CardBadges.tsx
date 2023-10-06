@@ -1,11 +1,17 @@
 import descIcon from '../../../../assets/images/description-icon.svg';
-import { PriorityBadge } from '../../../Badges/PriorityBadge';
+import { DateBadge } from '../../../Badges/DateBadge/DateBadge';
+import { PriorityBadge } from '../../../Badges/PriorityBadge/PriorityBadge';
 
-export const CardBadges = ({ priority, description }: CardBadgesProps) => {
+export const CardBadges = ({
+  priority,
+  description,
+  date,
+}: CardBadgesProps) => {
   return (
     <div className="card__badges">
-      <PriorityBadge priority={priority} />
+      <DateBadge date={date} />
       {description && <img src={descIcon} width={18} alt="desc-icon" />}
+      <PriorityBadge priority={priority} />
     </div>
   );
 };
@@ -13,4 +19,8 @@ export const CardBadges = ({ priority, description }: CardBadgesProps) => {
 interface CardBadgesProps {
   priority: string;
   description: string;
+  date: {
+    createdDate: number;
+    endDate: number | null;
+  };
 }
