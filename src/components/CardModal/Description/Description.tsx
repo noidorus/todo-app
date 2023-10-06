@@ -12,7 +12,7 @@ import {
 } from '../../../redux/actions/editorActions';
 
 import './Description.scss';
-import { Button } from '../../Buttons/Button/Button';
+import { Button } from '../../Controls/Button/Button';
 
 const Description = ({
   editorVisible,
@@ -60,9 +60,9 @@ const Description = ({
 
   return (
     <div className="description" ref={descRef}>
-      <div className="description-title__wrapper">
+      <div className="description__title-wrapper">
         <img className="icon" width={20} src={descIcon} alt="desc-icon" />
-        <h3 className="description-title">Description</h3>
+        <h3>Description</h3>
         {!!description && !editorVisible && (
           <Button name="Edit" onCLick={() => setEditorVisible(true)} />
         )}

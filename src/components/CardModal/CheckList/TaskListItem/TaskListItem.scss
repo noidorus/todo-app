@@ -1,0 +1,22 @@
+.task-list__item {
+  position: relative;
+  margin: 8px 0 8px -4px;
+
+  .checkbox {
+    left: -29px;
+    top: 5px;
+  }
+
+  .task-title {
+    display: block;
+    padding: 4px 5px;
+    border-radius: 4px;
+    cursor: pointer;
+
+    transition: background-color 0.3s linear;
+
+    &:hover {
+      background-color: var(--bg-color_300);
+    }
+  }
+}

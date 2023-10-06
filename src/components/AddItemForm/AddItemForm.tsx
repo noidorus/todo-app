@@ -1,6 +1,6 @@
-import { ChangeEvent, useState, KeyboardEvent } from 'react';
+import { ChangeEvent, useState, KeyboardEvent, createRef } from 'react';
 import classNames from 'classnames';
-import { EditButtons } from '../Buttons/EditButtons/EditButtons';
+import { EditButtons } from '../Controls/EditButtons/EditButtons';
 
 import './AddItemForm.scss';
 
@@ -11,12 +11,15 @@ const AddItemForm = ({
   textareaClasses,
 }: NewBoardFormProps) => {
   const [title, setTitle] = useState('');
+  const textareaRef = createRef<HTMLTextAreaElement>();
 
   const onAddItem = () => {
     if (title.trim()) {
-      addItem(title);
+      addItem(title.trim());
       setTitle('');
       closeForm();
+    } else {
+      textareaRef.current?.focus();
     }
   };
 
@@ -46,13 +49,13 @@ const AddItemForm = ({
         placeholder={placeholder}
         onChange={onChangeInputText}
         value={title}
+        ref={textareaRef}
         autoFocus
         onKeyDown={onEnter}
         className={classNames(textareaClasses)}
       />
       <EditButtons
         onClickBtn={onClickBtn}
-        btnDisabled={!title.trim().length}
         onClickClose={onCLoseForm}
         name="Create"
       />

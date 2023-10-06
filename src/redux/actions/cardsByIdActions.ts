@@ -3,6 +3,7 @@ export const CHANGE_CARD_TITLE = 'CHANGE_CARD_TITLE';
 export const SET_CARD_DESC = 'SET_CARD_DESC';
 export const SET_PRIORITY_SELECTOR = 'SET_PRIORITY_SELECTOR';
 export const CHANGE_END_DATE = 'CHANGE_END_DATE';
+export const ADD_TASK = 'ADD_TASK';
 
 export const addCardToCards = (id: string, title: string): AddCardToCards => ({
   type: ADD_CARD_TO_CARDS,
@@ -37,6 +38,15 @@ export const changeEndDate = (
   payload: { id, endDate },
 });
 
+export const addTask = (
+  id: string,
+  taskId: string,
+  title: string
+): AddTask => ({
+  type: ADD_TASK,
+  payload: { id, taskId, title },
+});
+
 interface AddCardToCards {
   type: typeof ADD_CARD_TO_CARDS;
   payload: { id: string; title: string };
@@ -58,9 +68,15 @@ interface ChangeEndDate {
   payload: { id: string; endDate: number | null };
 }
 
+interface AddTask {
+  type: typeof ADD_TASK;
+  payload: { id: string; taskId: string; title: string };
+}
+
 export type CardsByIdActions =
   | AddCardToCards
   | ChangeCardTitle
   | SetCardDesc
   | SetPrioritySelector
-  | ChangeEndDate;
+  | ChangeEndDate
+  | AddTask;

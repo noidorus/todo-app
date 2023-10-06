@@ -1,9 +1,10 @@
 import { FocusEvent, useState } from 'react';
 import DatePicker from 'react-datepicker';
 import { DateTime } from 'luxon';
-import { EditButtons } from '../../../Buttons/EditButtons/EditButtons';
+import { EditButtons } from '../../../Controls/EditButtons/EditButtons';
 
 import './DatePickerPopUp.scss';
+import { Checkbox } from '../../../Controls/Checkbox/Checkbox';
 
 export const DatePickerPopUp = ({
   id,
@@ -35,13 +36,16 @@ export const DatePickerPopUp = ({
     if (closePopUp) closePopUp();
   };
 
+  const onChangeCheckbox = (checked: boolean) => {
+    setCheckboxChecked(checked);
+  };
+
   const onClickSave = () => {
     if (checkboxChecked) {
       changeEndDate(id, endDate.getTime());
     } else {
       changeEndDate(id, null);
     }
-
     if (closePopUp) closePopUp();
   };
 
@@ -74,11 +78,7 @@ export const DatePickerPopUp = ({
 
       <div>End date:</div>
       <div className="end-date">
-        <input
-          type="checkbox"
-          checked={checkboxChecked}
-          onChange={({ target }) => setCheckboxChecked(target.checked)}
-        />
+        <Checkbox onChange={onChangeCheckbox} checked={checkboxChecked} />
         <DatePicker
           disabled={!checkboxChecked}
           onChangeRaw={onHandleChangeRaw}

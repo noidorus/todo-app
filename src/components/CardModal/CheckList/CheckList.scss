@@ -1,0 +1,22 @@
+.check-list {
+  &__title-wrapper {
+    padding: 0 0 0 50px;
+    position: relative;
+
+    .icon {
+      position: absolute;
+      left: 15px;
+      top: 0;
+    }
+  }
+
+  .task-list {
+    margin: 0;
+    list-style: none;
+    padding-left: 50px;
+  }
+
+  .add-item__wrapper {
+    margin-left: 50px;
+  }
+}

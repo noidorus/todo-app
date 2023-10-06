@@ -4,11 +4,16 @@ export interface BoardType {
   lists: string[];
 }
 
-export type ListType = {
+export interface ListType {
   id: string;
   title: string;
   cards: string[];
-};
+}
+export interface CheckListType {
+  id: string;
+  title: string;
+  checked: boolean;
+}
 
 export interface CardType {
   id: string;
@@ -16,6 +21,9 @@ export interface CardType {
   description: string;
   comments: string[];
   priority: string;
+  checkList: {
+    [key: string]: CheckListType;
+  };
   date: {
     createdDate: number;
     endDate: number | null;

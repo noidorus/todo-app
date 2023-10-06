@@ -7,6 +7,7 @@ import {
   SET_CARD_DESC,
   SET_PRIORITY_SELECTOR,
   CHANGE_END_DATE,
+  ADD_TASK,
 } from '../actions/cardsByIdActions';
 
 interface CardsByIdState {
@@ -24,6 +25,7 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         description: '',
         priority: '±0',
         comments: [],
+        checkList: {},
         date: { createdDate: Date.now(), endDate: null },
       };
       return { ...state, [payload.id]: newCard };
@@ -53,6 +55,18 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
           date: {
             ...state[payload.id].date,
             endDate: payload.endDate,
+          },
+        },
+      };
+    case ADD_TASK:
+      const task = { id: payload.taskId, title: payload.title, checked: false };
+      return {
+        ...state,
+        [payload.id]: {
+          ...state[payload.id],
+          checkList: {
+            ...state[payload.id].checkList,
+            [payload.taskId]: task,
           },
         },
       };

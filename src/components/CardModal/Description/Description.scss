@@ -1,8 +1,7 @@
 .description {
-  width: 550px;
-  float: left;
+  margin-bottom: 15px;
 
-  &-title__wrapper {
+  &__title-wrapper {
     position: relative;
     display: flex;
     align-items: center;
@@ -41,7 +40,7 @@
   }
 
   &-content {
-    max-height: 300px;
+    max-height: 250px;
     overflow-y: scroll;
     overflow-wrap: break-word;
     word-break: break-word;
@@ -66,5 +65,5 @@
 }
 
 .ck-editor__editable_inline {
-  height: 300px;
+  height: 250px;
 }
