@@ -1,5 +1,6 @@
 import { connect } from 'react-redux';
 import { useMemo, useState } from 'react';
+import { nanoid } from 'nanoid';
 import { State } from '../../../redux/store';
 import checkBoxIcon from '../../../assets/images/checkbox-outline.svg';
 import { Button } from '../../Commons/Button/Button';
@@ -11,9 +12,8 @@ import {
   changeTaskStatus,
   deleteTask,
 } from '../../../redux/actions/cardsByIdActions';
-import { nanoid } from 'nanoid';
-import './CheckList.scss';
 import { ProgressBar } from '../../Commons/ProgressBar/ProgressBar';
+import './CheckList.scss';
 
 const CheckList = ({
   taskList,
@@ -31,17 +31,17 @@ const CheckList = ({
   const onDeleteTask = (taskId: string) => {
     deleteTask(id, taskId);
   };
-  const taskItems = useMemo(() => Object.values(taskList), [taskList]);
+
   const completed = useMemo(() => {
-    const completedLentgh = taskItems.filter(({ checked }) => checked).length;
-    if (taskItems.length === 0) {
+    const completedLentgh = taskList.filter(({ checked }) => checked).length;
+    if (taskList.length === 0) {
       return 0;
     }
-    return Math.floor((100 / taskItems.length) * completedLentgh);
-  }, [taskItems]);
+    return Math.floor((100 / taskList.length) * completedLentgh);
+  }, [taskList]);
 
   const elements = useMemo(() => {
-    return taskItems.map((task) => (
+    return taskList.map((task) => (
       <TaskListItem
         onChangeCheckbox={onChangeCheckbox}
         key={task.id}
@@ -50,7 +50,7 @@ const CheckList = ({
       />
     ));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [taskItems]);
+  }, [taskList]);
 
   const onAddTask = (title: string) => {
     addTask(id, nanoid(), title);
@@ -95,9 +95,7 @@ export default connect(
 
 interface CheckListProps {
   id: string;
-  taskList: {
-    [key: string]: TaskType;
-  };
+  taskList: TaskType[];
   addTask: (id: string, taskId: string, title: string) => void;
   changeTaskStatus: (id: string, taskId: string, checked: boolean) => void;
   deleteTask: (id: string, taskId: string) => void;

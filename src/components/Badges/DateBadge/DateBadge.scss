@@ -1,6 +1,7 @@
 .date-badge {
   position: relative;
-  padding: 2px 0 2px 22px;
+  padding: 2px 2px 2px 22px;
+  transition: all 0.2s linear;
 
   &::before {
     content: url('../../../assets/images/time-outline.svg');

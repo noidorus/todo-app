@@ -21,9 +21,7 @@ export interface CardType {
   description: string;
   comments: string[];
   priority: string;
-  taskList: {
-    [key: string]: TaskType;
-  };
+  taskList: TaskType[];
   date: {
     createdDate: number;
     endDate: number | null;

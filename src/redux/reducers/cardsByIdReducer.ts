@@ -27,7 +27,7 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         description: '',
         priority: '±0',
         comments: [],
-        taskList: {},
+        taskList: [],
         date: { createdDate: Date.now(), endDate: null },
       };
       return { ...state, [payload.id]: newCard };
@@ -66,35 +66,33 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         ...state,
         [payload.id]: {
           ...state[payload.id],
-          taskList: {
-            ...state[payload.id].taskList,
-            [payload.taskId]: task,
-          },
+          taskList: [...state[payload.id].taskList, task],
         },
       };
     case CHANGE_TASK_STATUS:
-      return {
-        ...state,
-        [payload.id]: {
-          ...state[payload.id],
-          taskList: {
-            ...state[payload.id].taskList,
-            [payload.taskId]: {
-              ...state[payload.id].taskList[payload.taskId],
-              checked: payload.checked,
-            },
-          },
-        },
-      };
-    case DELETE_TASK:
-      const taskList = { ...state[payload.id].taskList };
-      delete taskList[payload.taskId];
+      const newTaskList = state[payload.id].taskList.map((task) =>
+        task.id === payload.taskId
+          ? { ...task, checked: payload.checked }
+          : task
+      );
 
       return {
         ...state,
         [payload.id]: {
           ...state[payload.id],
-          taskList: taskList,
+          taskList: newTaskList,
+        },
+      };
+    case DELETE_TASK:
+      const filteredList = state[payload.id].taskList.filter(
+        ({ id }) => id !== payload.taskId
+      );
+
+      return {
+        ...state,
+        [payload.id]: {
+          ...state[payload.id],
+          taskList: filteredList,
         },
       };
     default:
