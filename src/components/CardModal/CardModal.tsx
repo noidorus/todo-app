@@ -5,6 +5,7 @@ import './CardModal.scss';
 import Sidebar from './Sidebar/Sidebar';
 import Badges from './Badges/Badges';
 import CheckList from './CheckList/CheckList';
+import CommentsContainer from './Sidebar/Comments/Comments';
 
 export const CardModal = ({ card }: CardModalProps) => {
   return (
@@ -14,6 +15,7 @@ export const CardModal = ({ card }: CardModalProps) => {
         <Badges id={card.id} />
         <Description id={card.id} />
         <CheckList id={card.id} />
+        <CommentsContainer commentsListId={card.commentsId} />
       </div>
       <Sidebar id={card.id} />
     </div>

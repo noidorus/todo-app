@@ -29,7 +29,6 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         ...payload,
         description: '',
         priority: '±0',
-        comments: [],
         taskList: [],
         timer: {
           startedTime: null,

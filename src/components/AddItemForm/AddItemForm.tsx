@@ -1,13 +1,7 @@
-import {
-  ChangeEvent,
-  useState,
-  KeyboardEvent,
-  createRef,
-  useEffect,
-} from 'react';
-import classNames from 'classnames';
+import { useState, KeyboardEvent, createRef } from 'react';
 import { EditButtons } from '../Commons/EditButtons/EditButtons';
 import './AddItemForm.scss';
+import { TextArea } from '../Commons/TextArea/TextArea';
 
 const AddItemForm = ({
   addItem,
@@ -15,22 +9,13 @@ const AddItemForm = ({
   closeForm,
   textareaClass,
 }: NewBoardFormProps) => {
-  const [title, setTitle] = useState('');
+  const [text, setText] = useState('');
   const textareaRef = createRef<HTMLTextAreaElement>();
 
-  useEffect(() => {
-    if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height =
-        textareaRef.current.scrollHeight + 'px';
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [title]);
-
   const onAddItem = () => {
-    if (title.trim()) {
-      addItem(title.trim());
-      setTitle('');
+    if (text.trim()) {
+      addItem(text.trim());
+      setText('');
       closeForm();
     } else {
       textareaRef.current?.focus();
@@ -48,25 +33,25 @@ const AddItemForm = ({
     }
   };
 
-  const onChangeInputText = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setTitle(e.target.value);
+  const onChangeInputText = (text: string) => {
+    setText(text);
   };
 
   const onCLoseForm = () => {
     closeForm();
-    setTitle('');
+    setText('');
   };
 
   return (
     <div className="add-item__form">
-      <textarea
+      <TextArea
         placeholder={placeholder}
         onChange={onChangeInputText}
-        value={title}
-        ref={textareaRef}
-        autoFocus
-        onKeyDown={onEnter}
-        className={classNames(textareaClass)}
+        value={text}
+        textAreaRef={textareaRef}
+        autofocus={true}
+        onEnter={onEnter}
+        className={textareaClass}
       />
       <EditButtons
         onClickBtn={onClickBtn}
