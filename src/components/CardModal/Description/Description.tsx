@@ -4,15 +4,13 @@ import { setCardDesc } from '../../../redux/actions/cardsByIdActions';
 import { State } from '../../../redux/store';
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 import { DescriptionContent } from './DescriptionContent';
-import descIcon from '../../../assets/images/description-icon.svg';
 import { DescriptionEditor } from './DescriptionEditor';
 import {
   setEditorContent,
   setEditorVisible,
 } from '../../../redux/actions/editorActions';
-
-import './Description.scss';
 import { Button } from '../../Commons/Button/Button';
+import './Description.scss';
 
 const Description = ({
   editorVisible,
@@ -61,7 +59,6 @@ const Description = ({
   return (
     <div className="description" ref={descRef}>
       <div className="description__title-wrapper">
-        <img className="icon" width={20} src={descIcon} alt="desc-icon" />
         <h3>Description</h3>
         {!!description && !editorVisible && (
           <Button name="Edit" onCLick={() => setEditorVisible(true)} />

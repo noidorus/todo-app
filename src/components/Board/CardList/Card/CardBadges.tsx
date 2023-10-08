@@ -1,14 +1,16 @@
-import descIcon from '../../../../assets/images/description-icon.svg';
-import { TaskType } from '../../../../types';
+import { CardType } from '../../../../types';
 import { DateBadge } from '../../../Badges/DateBadge/DateBadge';
 import { PriorityBadge } from '../../../Badges/PriorityBadge/PriorityBadge';
 import { TaskListBadge } from '../../../Badges/TaskListBadge/TaskListBadge';
+import descIcon from '../../../../assets/images/reader-outline.svg';
+import { TimerBadge } from '../../../Badges/TimerBadge/TimerBadge';
 
 export const CardBadges = ({
   priority,
   description,
   date,
   taskList,
+  timer,
 }: CardBadgesProps) => {
   return (
     <div className="card__badges">
@@ -16,17 +18,9 @@ export const CardBadges = ({
       <PriorityBadge priority={priority} />
       <TaskListBadge taskList={taskList} />
       {description && <img src={descIcon} width={18} alt="desc-icon" />}
-      {}
+      <TimerBadge timer={timer} />
     </div>
   );
 };
 
-interface CardBadgesProps {
-  priority: string;
-  description: string;
-  taskList: TaskType[];
-  date: {
-    createdDate: number;
-    endDate: number | null;
-  };
-}
+interface CardBadgesProps extends CardType {}

@@ -1,6 +1,5 @@
 import classNames from 'classnames';
 import { Checkbox } from '../../../Commons/Checkbox/Checkbox';
-
 import trashIcon from '../../../../assets/images/trash-outline.svg';
 import './TaskListItem.scss';
 

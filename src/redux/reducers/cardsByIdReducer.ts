@@ -10,6 +10,9 @@ import {
   ADD_TASK,
   CHANGE_TASK_STATUS,
   DELETE_TASK,
+  SET_TIMER,
+  PAUSE_TIMER,
+  RESET_TIMER,
 } from '../actions/cardsByIdActions';
 
 interface CardsByIdState {
@@ -28,6 +31,10 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         priority: '±0',
         comments: [],
         taskList: [],
+        timer: {
+          startedTime: null,
+          duration: 0,
+        },
         date: { createdDate: Date.now(), endDate: null },
       };
       return { ...state, [payload.id]: newCard };
@@ -93,6 +100,40 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         [payload.id]: {
           ...state[payload.id],
           taskList: filteredList,
+        },
+      };
+    case SET_TIMER:
+      return {
+        ...state,
+        [payload.id]: {
+          ...state[payload.id],
+          timer: {
+            ...state[payload.id].timer,
+            startedTime: payload.startedTime,
+          },
+        },
+      };
+    case PAUSE_TIMER:
+      const duration = state[payload.id].timer.duration + payload.duration;
+      return {
+        ...state,
+        [payload.id]: {
+          ...state[payload.id],
+          timer: {
+            duration: duration,
+            startedTime: null,
+          },
+        },
+      };
+    case RESET_TIMER:
+      return {
+        ...state,
+        [payload.id]: {
+          ...state[payload.id],
+          timer: {
+            duration: 0,
+            startedTime: null,
+          },
         },
       };
     default:

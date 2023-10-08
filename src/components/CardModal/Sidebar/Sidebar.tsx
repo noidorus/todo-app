@@ -3,13 +3,16 @@ import { PrioritySelectorPopUp } from './PrioritySelectorPopUp/PrioritySelectorP
 import { State } from '../../../redux/store';
 import {
   changeEndDate,
+  pauseTimer,
+  resetTimer,
   setPrioritySelector,
+  setTimer,
 } from '../../../redux/actions/cardsByIdActions';
-
-import 'react-datepicker/dist/react-datepicker.css';
-import './Sidebar.scss';
 import { DatePickerPopUp } from './DatePickerPopUp/DatePickerPopUp';
 import { SidebarButtonLayout } from './SidebarButtonLayout';
+import './Sidebar.scss';
+import { TimerPopUp } from './TimerPopUp/TimerPopUp';
+import { CardType } from '../../../types';
 
 const Sidebar = (props: SidebarProps) => {
   return (
@@ -29,6 +32,16 @@ const Sidebar = (props: SidebarProps) => {
           changeEndDate={props.changeEndDate}
         />
       </SidebarButtonLayout>
+
+      <SidebarButtonLayout name="Timer">
+        <TimerPopUp
+          id={props.id}
+          timer={props.timer}
+          setTimer={props.setTimer}
+          pauseTimer={props.pauseTimer}
+          resetTimer={props.resetTimer}
+        />
+      </SidebarButtonLayout>
     </ul>
   );
 };
@@ -37,16 +50,13 @@ export default connect(
   ({ cardsById }: State, { id }: { id: string }) => ({
     ...cardsById[id],
   }),
-  { setPrioritySelector, changeEndDate }
+  { setPrioritySelector, changeEndDate, setTimer, pauseTimer, resetTimer }
 )(Sidebar);
 
-interface SidebarProps {
-  id: string;
-  priority: string;
-  date: {
-    createdDate: number;
-    endDate: number | null;
-  };
+interface SidebarProps extends CardType {
   setPrioritySelector: (id: string, priority: string) => void;
   changeEndDate: (id: string, endDate: number | null) => void;
+  setTimer: (id: string, startedTime: number) => void;
+  pauseTimer: (id: string, duration: number) => void;
+  resetTimer: (id: string) => void;
 }

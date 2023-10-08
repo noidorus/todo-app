@@ -26,4 +26,8 @@ export interface CardType {
     createdDate: number;
     endDate: number | null;
   };
+  timer: {
+    startedTime: null | number;
+    duration: number;
+  };
 }

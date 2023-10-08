@@ -1,0 +1,28 @@
+.card-header {
+  padding: 5px 50px 5px 40px;
+  position: relative;
+
+  &::before {
+    content: url('../../../assets/images/title-icon.svg');
+    width: 20px;
+    position: absolute;
+    left: 12px;
+    top: 16px;
+  }
+
+  &__title-assist {
+    display: none;
+  }
+
+  &__title {
+    padding: 6px 10px;
+    background-color: #b8a99a;
+    font-weight: 600;
+    border: none;
+    font-size: 22px;
+
+    &:focus {
+      background-color: rgb(153, 140, 128);
+    }
+  }
+}

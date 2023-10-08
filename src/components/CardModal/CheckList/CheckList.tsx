@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { useMemo, useState } from 'react';
 import { nanoid } from 'nanoid';
 import { State } from '../../../redux/store';
-import checkBoxIcon from '../../../assets/images/checkbox-outline.svg';
 import { Button } from '../../Commons/Button/Button';
 import TaskListItem from './TaskListItem/TaskListItem';
 import AddItemForm from '../../AddItemForm/AddItemForm';
@@ -60,12 +59,6 @@ const CheckList = ({
     <div className="check-list">
       <div className="check-list__title-wrapper">
         <h3>Check-list</h3>
-        <img
-          width={22}
-          src={checkBoxIcon}
-          alt="checkbox-icon"
-          className="icon"
-        />
       </div>
       <ProgressBar completed={completed} />
 

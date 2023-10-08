@@ -4,33 +4,6 @@
   padding: 5px 10px;
   border-radius: 10px;
 
-  &__header {
-    padding: 5px 50px 5px 40px;
-    position: relative;
-
-    .icon {
-      position: absolute;
-      left: 12px;
-      top: 16px;
-    }
-  }
-
-  &__title {
-    padding: 6px 10px;
-    background-color: #b8a99a;
-    font-weight: 600;
-    border: none;
-    font-size: 22px;
-
-    &-assist {
-      display: none;
-    }
-
-    &:focus {
-      background-color: rgb(153, 140, 128);
-    }
-  }
-
   .main-col {
     width: 550px;
     float: left;

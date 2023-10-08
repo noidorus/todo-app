@@ -6,6 +6,9 @@ export const CHANGE_END_DATE = 'CHANGE_END_DATE';
 export const ADD_TASK = 'ADD_TASK';
 export const CHANGE_TASK_STATUS = 'CHANGE_TASK_STATUS';
 export const DELETE_TASK = 'DELETE_TASK';
+export const SET_TIMER = 'SET_TIMER';
+export const PAUSE_TIMER = 'PAUSE_TIMER';
+export const RESET_TIMER = 'RESET_TIMER';
 
 export const addCardToCards = (id: string, title: string): AddCardToCards => ({
   type: ADD_CARD_TO_CARDS,
@@ -59,9 +62,24 @@ export const changeTaskStatus = (
   payload: { id, taskId, checked },
 });
 
+export const setTimer = (id: string, startedTime: number): SetTimer => ({
+  type: SET_TIMER,
+  payload: { id, startedTime },
+});
+
+export const pauseTimer = (id: string, duration: number): PauseTimer => ({
+  type: PAUSE_TIMER,
+  payload: { id, duration },
+});
+
 export const deleteTask = (id: string, taskId: string): DeleteTask => ({
   type: DELETE_TASK,
   payload: { id, taskId },
+});
+
+export const resetTimer = (id: string): ResetTimer => ({
+  type: RESET_TIMER,
+  payload: { id },
 });
 
 interface AddCardToCards {
@@ -92,10 +110,21 @@ interface ChangeTaskStatus {
   type: typeof CHANGE_TASK_STATUS;
   payload: { id: string; taskId: string; checked: boolean };
 }
-
 interface DeleteTask {
   type: typeof DELETE_TASK;
   payload: { id: string; taskId: string };
+}
+interface SetTimer {
+  type: typeof SET_TIMER;
+  payload: { id: string; startedTime: number };
+}
+interface PauseTimer {
+  type: typeof PAUSE_TIMER;
+  payload: { id: string; duration: number };
+}
+interface ResetTimer {
+  type: typeof RESET_TIMER;
+  payload: { id: string };
 }
 
 export type CardsByIdActions =
@@ -106,4 +135,7 @@ export type CardsByIdActions =
   | ChangeEndDate
   | AddTask
   | ChangeTaskStatus
-  | DeleteTask;
+  | DeleteTask
+  | SetTimer
+  | PauseTimer
+  | ResetTimer;

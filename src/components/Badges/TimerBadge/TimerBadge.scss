@@ -1,0 +1,21 @@
+.timer-badge {
+  padding: 2px 4px 2px 22px;
+  border-radius: 4px;
+  background-color: none;
+  position: relative;
+
+  &::before {
+    content: url('../../../assets/images/timer-outline.svg');
+    width: 16px;
+    position: absolute;
+    left: 3px;
+  }
+
+  &-active {
+    background-color: red;
+  }
+
+  &-paused {
+    background-color: rgba(0, 0, 0, 0.196);
+  }
+}

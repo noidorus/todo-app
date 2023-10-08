@@ -1,11 +1,14 @@
 .check-list {
   margin-bottom: 50px;
+
   &__title-wrapper {
     padding: 0 0 0 50px;
     position: relative;
     margin-bottom: 4px;
 
-    .icon {
+    &::before {
+      content: url('../../../assets/images/checkbox-outline.svg');
+      width: 22px;
       position: absolute;
       left: 15px;
       top: 0;

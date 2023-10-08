@@ -4,9 +4,9 @@ import { State } from '../../../../redux/store';
 import { CardType } from '../../../../types';
 import { useModal } from '../../../Modal/ModalProvider';
 import { CardModal } from '../../../CardModal/CardModal';
+import { CardBadges } from './CardBadges';
 
 import './Card.scss';
-import { CardBadges } from './CardBadges';
 
 const Card = ({ card, index }: CardProps) => {
   const { setModal } = useModal();

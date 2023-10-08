@@ -8,10 +8,12 @@
     justify-content: space-between;
     padding: 5px 0 15px 50px;
 
-    .icon {
+    &::before {
+      content: url('../../../assets/images/reader-outline.svg');
       position: absolute;
       left: 14px;
-      top: 8px;
+      top: 6px;
+      width: 22px;
     }
   }
 
