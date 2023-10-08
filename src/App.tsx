@@ -1,27 +1,20 @@
 import React from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, NavLink } from 'react-router-dom';
 import { BoardsPage } from './pages/BoardsPage/BoardsPage';
-import './App.scss';
 import ActiveBoardPage from './pages/ActiveBoardPage/ActiveBoardPage';
 import { ModalProvider } from './components/Modal/ModalProvider';
+import logo from './assets/images/logo.png';
+import './App.scss';
 
 function App() {
   return (
     <ModalProvider>
       <div className="App">
         <header>
-          <span>logo</span>
-          <Link
-            style={{
-              float: 'right',
-              padding: '4px',
-              border: '1px solid black',
-              borderRadius: '5px',
-            }}
-            to="/"
-          >
+          <img width={40} src={logo} alt="" />
+          <NavLink className="header__link" to="/">
             Boards
-          </Link>
+          </NavLink>
         </header>
 
         <Routes>

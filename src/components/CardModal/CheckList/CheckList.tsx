@@ -70,9 +70,10 @@ const CheckList = ({
             closeForm={() => setAddingTask(false)}
             addItem={onAddTask}
             placeholder="Add task"
+            textareaClass={'check-list__textarea'}
           />
         ) : (
-          <Button onCLick={() => setAddingTask(true)} name="Add task" />
+          <Button onClick={() => setAddingTask(true)} name="Add task" />
         )}
       </div>
     </div>

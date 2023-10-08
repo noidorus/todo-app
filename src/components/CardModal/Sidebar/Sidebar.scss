@@ -6,14 +6,19 @@
   list-style: none;
 
   &__item {
-    background-color: var(--bg-color_300);
     border-radius: 4px;
-    margin: 4px 0;
+    margin: 6px 0;
     position: relative;
     transition: all 0.2s linear;
 
     &:hover {
-      background-color: var(--bg-color_300-hover);
+      .btn-sidebar {
+        background-color: var(--bg-color_300-hover);
+      }
+    }
+
+    .btn-sidebar {
+      width: 100%;
     }
   }
 

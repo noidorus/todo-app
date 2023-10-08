@@ -1,8 +1,16 @@
+import classNames from 'classnames';
 import './Button.scss';
 
-export const Button = (props: ButtonProps) => {
+export const Button = ({ disabled = false, ...props }: ButtonProps) => {
+  const classes = classNames('button', props.class);
+
   return (
-    <button className="button" type="button" onClick={props.onCLick}>
+    <button
+      className={classes}
+      disabled={disabled}
+      type="button"
+      onClick={props.onClick}
+    >
       {props.name}
     </button>
   );
@@ -10,5 +18,7 @@ export const Button = (props: ButtonProps) => {
 
 interface ButtonProps {
   name: string;
-  onCLick: () => void;
+  class?: string;
+  disabled?: boolean;
+  onClick: () => void;
 }

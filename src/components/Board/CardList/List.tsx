@@ -45,7 +45,7 @@ const List = ({ list, addCardToList, addCardToCards }: ListProps) => {
             {provided.placeholder}
             {addingItem ? (
               <AddItemForm
-                textareaClasses={['card']}
+                textareaClass={'card'}
                 placeholder="Type card title"
                 addItem={onAddCard}
                 closeForm={toggleAddingItem}

@@ -1,3 +1,4 @@
+import { Button } from '../../../Commons/Button/Button';
 import './TimerPopUp.scss';
 
 export const TimerPopUp = ({ id, timer, ...props }: TimerPopUpProps) => {
@@ -16,16 +17,27 @@ export const TimerPopUp = ({ id, timer, ...props }: TimerPopUpProps) => {
     props.resetTimer(id);
   };
 
+  const handleClose = () => {
+    if (props.closePopUp) props.closePopUp();
+  };
+
   return (
     <div className="timer__popup">
       {timer.startedTime ? (
-        <button onClick={handlePauseTimer}>Pause</button>
+        // <button onClick={handlePauseTimer}>Pause</button>
+        <Button class="btn-orange" name="Pause" onClick={handlePauseTimer} />
       ) : (
-        <button onClick={handleCLickStart}>Start</button>
+        <Button class="btn-green" name="Start" onClick={handleCLickStart} />
       )}
-      <button disabled={timer.duration === 0} onClick={handleResetTimer}>
-        Reset
-      </button>
+
+      <Button
+        name="Reset"
+        class="btn-red"
+        onClick={handleResetTimer}
+        disabled={!timer.duration}
+      />
+
+      <Button class="btn-sec" name="Close" onClick={handleClose} />
     </div>
   );
 };
@@ -39,4 +51,5 @@ interface TimerPopUpProps {
   setTimer: (id: string, startedTime: number) => void;
   pauseTimer: (id: string, duration: number) => void;
   resetTimer: (id: string) => void;
+  closePopUp?: () => void;
 }

@@ -8,6 +8,8 @@
 
   &__title {
     font-weight: 500;
+    overflow-wrap: break-word;
+    word-break: break-word;
   }
 
   &__badges {

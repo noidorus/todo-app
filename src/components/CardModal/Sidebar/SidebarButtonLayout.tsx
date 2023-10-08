@@ -1,5 +1,6 @@
 import React, { createRef, useState } from 'react';
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
+import { Button } from '../../Commons/Button/Button';
 
 export const SidebarButtonLayout = ({
   name,
@@ -26,12 +27,11 @@ export const SidebarButtonLayout = ({
 
   return (
     <li className="sidebar__item" ref={itemRef}>
-      <span
-        className="sidebar__item-name"
+      <Button
+        class="btn-sidebar"
         onClick={() => setChildrenVisible((state) => !state)}
-      >
-        {name}
-      </span>
+        name={name}
+      />
 
       {childrenVisible && renderChildren()}
     </li>

@@ -1,17 +1,31 @@
-import { ChangeEvent, useState, KeyboardEvent, createRef } from 'react';
+import {
+  ChangeEvent,
+  useState,
+  KeyboardEvent,
+  createRef,
+  useEffect,
+} from 'react';
 import classNames from 'classnames';
 import { EditButtons } from '../Commons/EditButtons/EditButtons';
-
 import './AddItemForm.scss';
 
 const AddItemForm = ({
   addItem,
   placeholder,
   closeForm,
-  textareaClasses,
+  textareaClass,
 }: NewBoardFormProps) => {
   const [title, setTitle] = useState('');
   const textareaRef = createRef<HTMLTextAreaElement>();
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + 'px';
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title]);
 
   const onAddItem = () => {
     if (title.trim()) {
@@ -52,7 +66,7 @@ const AddItemForm = ({
         ref={textareaRef}
         autoFocus
         onKeyDown={onEnter}
-        className={classNames(textareaClasses)}
+        className={classNames(textareaClass)}
       />
       <EditButtons
         onClickBtn={onClickBtn}
@@ -67,7 +81,7 @@ interface NewBoardFormProps {
   addItem: (title: string) => void;
   placeholder: string;
   closeForm: () => void;
-  textareaClasses?: string[];
+  textareaClass?: string;
 }
 
 export default AddItemForm;

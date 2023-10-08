@@ -1,4 +1,4 @@
-import { KeyboardEvent, createRef, useState } from 'react';
+import { KeyboardEvent, createRef, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { changeCardTitle } from '../../../redux/actions/cardsByIdActions';
 import { State } from '../../../redux/store';
@@ -11,6 +11,15 @@ const CardModalHeader = (props: CardModalHeaderProps) => {
   const onHandleBlur = () => {
     changeCardTitle();
   };
+
+  useEffect(() => {
+    if (textareaRef.current) {
+      textareaRef.current.style.height = 'auto';
+      textareaRef.current.style.height =
+        textareaRef.current.scrollHeight + 'px';
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title]);
 
   const changeCardTitle = () => {
     if (!title.trim()) {

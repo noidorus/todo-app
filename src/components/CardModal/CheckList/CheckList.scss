@@ -25,4 +25,19 @@
   .add-item__wrapper {
     margin-left: 50px;
   }
+
+  &__textarea {
+    background-color: var(--bg-color_300);
+    height: 40px;
+    padding: 8px 5px 0 10px;
+    color: aliceblue;
+
+    &:focus {
+      outline: 1px solid blue;
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.536);
+    }
+  }
 }

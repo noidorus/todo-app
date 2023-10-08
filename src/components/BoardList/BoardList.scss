@@ -9,6 +9,12 @@
     border-radius: 5px;
     background-color: rgba(12, 10, 10, 0.3);
     height: 100%;
+
+    textarea {
+      background-color: rgb(211, 211, 211);
+      height: 38px;
+      padding: 8px 5px 0 10px;
+    }
   }
 
   .add-board__btn {
@@ -28,13 +34,9 @@
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  width: 19%;
+  width: 30%;
   height: 86px;
   transition: transform 0.3s linear;
-
-  // &:hover .item-link {
-  //   background-color: #514538c9;
-  // }
 
   &-link {
     color: aliceblue;

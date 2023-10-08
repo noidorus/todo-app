@@ -66,6 +66,11 @@
   }
 }
 
+.ck.ck-editor__main > .ck-editor__editable {
+  background-color: var(--bg-color_300);
+  color: aliceblue;
+}
+
 .ck-editor__editable_inline {
   height: 250px;
 }

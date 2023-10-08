@@ -61,7 +61,7 @@ const Description = ({
       <div className="description__title-wrapper">
         <h3>Description</h3>
         {!!description && !editorVisible && (
-          <Button name="Edit" onCLick={() => setEditorVisible(true)} />
+          <Button name="Edit" onClick={() => setEditorVisible(true)} />
         )}
       </div>
 

@@ -1,4 +1,5 @@
 import CloseIcon from '../../../assets/images/close-outline.svg';
+import { Button } from '../Button/Button';
 import './EditButtons.scss';
 
 export const EditButtons = ({
@@ -7,14 +8,13 @@ export const EditButtons = ({
 }: EditButtonsProps) => {
   return (
     <div className="edit-btns">
-      <button
-        className="edit-btn"
-        type="button"
-        onClick={props.onClickBtn}
+      <Button
+        class="btn-green"
+        name={props.name}
         disabled={btnDisabled}
-      >
-        {props.name}
-      </button>
+        onClick={props.onClickBtn}
+      />
+
       <img
         className="edit-btn-close"
         alt="close-icon"

@@ -3,28 +3,6 @@
   justify-content: stretch;
   gap: 5px;
 
-  .edit-btn {
-    cursor: pointer;
-    width: 120px;
-    background-color: #00d989;
-    border-radius: 5px;
-    border: none;
-    transition: all 0.3s linear;
-
-    &:disabled {
-      background-color: rgba(0, 217, 137, 0.3);
-    }
-
-    &:not([disabled]) {
-      box-shadow: -1px 1px 8px 1px rgba(0, 0, 0, 0.32);
-    }
-
-    &:not([disabled]):hover {
-      transform: scale(0.98);
-      background-color: #02ffa2;
-    }
-  }
-
   .edit-btn-close {
     cursor: pointer;
     width: 25px;
