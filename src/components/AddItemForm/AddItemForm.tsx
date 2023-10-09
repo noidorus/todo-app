@@ -1,7 +1,7 @@
 import { useState, KeyboardEvent, createRef } from 'react';
 import { EditButtons } from '../Commons/EditButtons/EditButtons';
-import './AddItemForm.scss';
 import { TextArea } from '../Commons/TextArea/TextArea';
+import './AddItemForm.scss';
 
 const AddItemForm = ({
   addItem,

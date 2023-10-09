@@ -28,7 +28,7 @@ export const listsByIdReducer: Reducer<ListbyIdState, ListByIdActions> = (
             },
           };
         },
-        {}
+        {} as ListbyIdState
       );
 
       return { ...state, ...newLists };

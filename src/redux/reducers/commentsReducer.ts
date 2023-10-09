@@ -3,10 +3,13 @@ import {
   CommentsActions,
   ADD_COMMENT,
   CREATE_COMMENTS_LIST,
+  DELETE_COMMENTS,
 } from '../actions/commentsActions';
 
 interface CommentsState {
-  [key: string]: CommentType[];
+  [key: string]: {
+    [key: string]: CommentType;
+  };
 }
 
 export const commentsReducer = (
@@ -15,12 +18,25 @@ export const commentsReducer = (
 ) => {
   switch (type) {
     case CREATE_COMMENTS_LIST:
-      return { ...state, [payload.id]: [] };
+      return { ...state, [payload.id]: {} };
     case ADD_COMMENT:
       return {
         ...state,
-        [payload.id]: [...state[payload.id], payload.comment],
+        [payload.id]: {
+          ...state[payload.id],
+          [payload.comment.id]: payload.comment,
+        },
       };
+    case DELETE_COMMENTS:
+      const comments = { ...state[payload.id] };
+
+      payload.commentsIds.forEach((id) => {
+        delete comments[id];
+      });
+
+      // const arr = [...state[payload.id],];
+
+      return { ...state, [payload.id]: comments };
     default:
       return state;
   }

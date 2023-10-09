@@ -22,7 +22,7 @@ const Description = ({
   setEditorVisible,
 }: DescriptionProps) => {
   const descRef = createRef<HTMLDivElement>();
-
+  // console.log('render');
   const updateDescription = () => {
     setEditorVisible(false);
     setCardDesc(id, content);

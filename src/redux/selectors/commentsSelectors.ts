@@ -29,14 +29,13 @@ const recursiveUpdate = (updated: Node, nestedMap: Map<string, Node>) => {
   return recur(updated);
 };
 
-const addNewComment = (comment: CommentType, nestedMap: Map<string, Node>) => {
-  const commentNode = commentToNode(comment);
-  nestedMap.set(comment.id, commentNode);
+const addNewComment = (comment: Node, nestedMap: Map<string, Node>) => {
+  nestedMap.set(comment.id, comment);
   const parent = nestedMap.get(comment.pid);
 
   const updatedParent: Node = {
     ...parent!,
-    children: [commentNode, ...parent!.children],
+    children: [comment, ...parent!.children],
   };
   recursiveUpdate(updatedParent, nestedMap);
 };

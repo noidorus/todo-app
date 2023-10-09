@@ -5,7 +5,7 @@ import './CardModal.scss';
 import Sidebar from './Sidebar/Sidebar';
 import Badges from './Badges/Badges';
 import CheckList from './CheckList/CheckList';
-import CommentsContainer from './Sidebar/Comments/Comments';
+import CommentsContainer from './Comments/CommentsContainer';
 
 export const CardModal = ({ card }: CardModalProps) => {
   return (
