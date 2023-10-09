@@ -19,7 +19,7 @@ export interface CardType {
   id: string;
   title: string;
   description: string;
-  comments: string[];
+  commentsId: string;
   priority: string;
   taskList: TaskType[];
   date: {
@@ -30,4 +30,10 @@ export interface CardType {
     startedTime: null | number;
     duration: number;
   };
+}
+
+export interface CommentType {
+  id: string;
+  pid: string;
+  text: string;
 }

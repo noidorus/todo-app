@@ -1,0 +1,51 @@
+.comments {
+  &__title {
+    position: relative;
+    padding: 8px 8px 8px 50px;
+
+    &::before {
+      content: url('../../../assets/images/chatbox-outline.svg');
+      width: 20px;
+      position: absolute;
+      left: 17px;
+      top: 10px;
+    }
+  }
+
+  &__content {
+    margin-left: 50px;
+
+    & > .comments__list {
+      padding: 0;
+      &::after {
+        content: none;
+      }
+    }
+  }
+
+  &__list {
+    list-style: none;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5px;
+    padding-left: 15px;
+
+    &::after {
+      content: '';
+      background-color: var(--bg-color_300);
+      position: absolute;
+      left: 5px;
+      top: -3px;
+      bottom: 0;
+      width: 1.5px;
+    }
+  }
+}
+
+.comment {
+  &__title {
+    margin-bottom: 2px;
+  }
+}

@@ -4,12 +4,14 @@ import { listsByIdReducer } from './reducers/listsById';
 import { cardsByIdReducer } from './reducers/cardsByIdReducer';
 import { throttle } from '../helpers/helpers';
 import { editorReducer } from './reducers/editorResucer';
+import { commentsReducer } from './reducers/commentsReducer';
 
 const reducers = combineReducers({
   boards: boardsReducer,
   listById: listsByIdReducer,
   cardsById: cardsByIdReducer,
   editor: editorReducer,
+  comments: commentsReducer,
 });
 
 const saveState = (state: State) => {

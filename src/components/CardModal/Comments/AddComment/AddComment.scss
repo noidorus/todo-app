@@ -1,0 +1,24 @@
+.add-comment {
+  margin-left: 50px;
+  &__plug {
+    cursor: pointer;
+    border-radius: 5px;
+    padding: 5px 8px;
+    background-color: var(--bg-color_300);
+    transition: all 0.25s linear;
+
+    &:hover {
+      background-color: var(--bg-color_300-hover);
+    }
+  }
+
+  &__textarea {
+    padding: 6px 10px 5px 10px;
+    background-color: var(--bg-color_300);
+    color: white;
+
+    &::placeholder {
+      color: rgb(180, 177, 177);
+    }
+  }
+}

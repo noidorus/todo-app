@@ -11,8 +11,14 @@ import Card from './Card/Card';
 import { useState, useMemo, createRef } from 'react';
 import './List.scss';
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
+import { createCommentsList } from '../../../redux/actions/commentsActions';
 
-const List = ({ list, addCardToList, addCardToCards }: ListProps) => {
+const List = ({
+  list,
+  addCardToList,
+  addCardToCards,
+  createCommentsList,
+}: ListProps) => {
   const [addingItem, setAddingItem] = useState(false);
   const listRef = createRef<HTMLDivElement>();
   useOnClickOutside(listRef, () => {
@@ -21,8 +27,10 @@ const List = ({ list, addCardToList, addCardToCards }: ListProps) => {
 
   const onAddCard = (title: string) => {
     const cardId = nanoid(10);
+    const commentsId = nanoid(10);
     addCardToList(cardId, list.id);
-    addCardToCards(cardId, title);
+    addCardToCards(cardId, title, commentsId);
+    createCommentsList(commentsId);
   };
 
   const toggleAddingItem = () => {
@@ -62,19 +70,19 @@ const List = ({ list, addCardToList, addCardToCards }: ListProps) => {
   );
 };
 
+export default connect(
+  ({ listById }: State, { listId }: OwnProps) => ({
+    list: listById[listId],
+  }),
+  { addCardToList, addCardToCards, createCommentsList }
+)(List);
+
 interface ListProps {
   list: ListType;
   addCardToList: (cardId: string, listId: string) => void;
-  addCardToCards: (id: string, title: string) => void;
+  addCardToCards: (id: string, title: string, commentsId: string) => void;
+  createCommentsList: (id: string) => void;
 }
 interface OwnProps {
   listId: string;
 }
-
-const mapStateToProps = ({ listById }: State, { listId }: OwnProps) => ({
-  list: listById[listId],
-});
-
-export default connect(mapStateToProps, { addCardToList, addCardToCards })(
-  List
-);
