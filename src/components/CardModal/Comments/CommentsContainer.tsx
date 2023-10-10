@@ -18,8 +18,6 @@ const CommentsContainer = ({
     return <div>Loading...</div>;
   }
 
-  console.log('render');
-
   return (
     <div className="comments">
       <h3 className="comments__title">Comments</h3>

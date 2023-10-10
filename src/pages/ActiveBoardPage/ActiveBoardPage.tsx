@@ -17,7 +17,7 @@ const ActiveBoardPage = ({ boards }: ActiveBoardPageProps) => {
   return (
     <div>
       <h2 className="title">{activeBoard.title}</h2>
-      <Board lists={activeBoard.lists} />
+      <Board cardNum={activeBoard.cardNum} lists={activeBoard.lists} />
       {Modal}
     </div>
   );

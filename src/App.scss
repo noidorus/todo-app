@@ -34,21 +34,3 @@ textarea {
   text-align: center;
   font-size: 2.5em;
 }
-
-.header {
-  &__link {
-    float: right;
-    font-size: 18px;
-    padding: 4px 16px;
-    border: 1px solid black;
-    border-radius: 5px;
-    transition: all 0.3s linear;
-    background-color: var(--bg-color_500);
-    color: white;
-
-    &:hover {
-      transform: scale(0.95);
-      background-color: var(--bg-color_500-hover);
-    }
-  }
-}
