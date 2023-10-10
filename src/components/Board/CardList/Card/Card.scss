@@ -1,5 +1,9 @@
 .card {
-  margin: 6px 10px;
+  &-wrapper {
+    margin: 6px 10px;
+  }
+
+  display: block;
   padding: 5px;
   border-radius: 5px;
   background-color: var(--bg-color_200);

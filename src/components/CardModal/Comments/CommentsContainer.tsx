@@ -30,14 +30,18 @@ const CommentsContainer = ({
 };
 
 export default connect(
-  ({ comments }: State, { commentsListId }: { commentsListId: string }) => {
+  ({ comments, cardsById }: State, { id }: { id: string }) => {
+    const commentsListId = cardsById[id].commentsId;
+
     return {
       comments: comments[commentsListId],
+      commentsListId: commentsListId,
     };
   }
 )(CommentsContainer);
 
 interface CommentsContainerProps {
+  id: string;
   commentsListId: string;
   comments: {
     [key: string]: CommentType;

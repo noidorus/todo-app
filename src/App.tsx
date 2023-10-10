@@ -1,24 +1,35 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, useLocation } from 'react-router-dom';
 import { BoardsPage } from './pages/BoardsPage/BoardsPage';
 import ActiveBoardPage from './pages/ActiveBoardPage/ActiveBoardPage';
-import { ModalProvider } from './components/Modal/ModalProvider';
 import { Header } from './components/Header/Header';
+import { ModalLayout } from './components/Modal/ModalLayout';
+import { CardModal } from './components/CardModal/CardModal';
 
 import './App.scss';
 
 function App() {
-  return (
-    <ModalProvider>
-      <div className="App">
-        <Header />
+  const location = useLocation();
+  const background = location.state && location.state.background;
 
+  return (
+    <div className="App">
+      <Header />
+
+      <Routes location={background}>
+        <Route path="/" element={<BoardsPage />} />
+        <Route path="/:id" element={<ActiveBoardPage />} />
+      </Routes>
+
+      {background && (
         <Routes>
-          <Route path="/" element={<BoardsPage />} />
-          <Route path="/:id" element={<ActiveBoardPage />} />
+          <Route path="/" element={<ModalLayout />}>
+            <Route path="/card/:id" element={<CardModal />} />
+            {/* <Route path="/card/:id" element={<ModalPage />} /> */}
+          </Route>
         </Routes>
-      </div>
-    </ModalProvider>
+      )}
+    </div>
   );
 }
 

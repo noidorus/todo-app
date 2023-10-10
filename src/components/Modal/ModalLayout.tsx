@@ -1,16 +1,18 @@
 import { MouseEvent } from 'react';
+import { useNavigate, Outlet } from 'react-router-dom';
 import closeIcon from '../../assets/images/close-outline.svg';
-import { ModalLayoutProps } from './props';
 
 import './ModalLayout.scss';
 
-export const ModalLayout = ({ children, closeModal }: ModalLayoutProps) => {
+export const ModalLayout = () => {
+  const navigate = useNavigate();
+
   const handleCloseModal = (e: MouseEvent) => {
     const target = e.target as HTMLElement;
     const currTarget = e.currentTarget as HTMLElement;
 
     if (target === currTarget) {
-      closeModal();
+      navigate(-1);
     }
   };
 
@@ -23,7 +25,7 @@ export const ModalLayout = ({ children, closeModal }: ModalLayoutProps) => {
           alt="closeIcon"
           onClick={handleCloseModal}
         />
-        {children}
+        <Outlet />
       </div>
       <div className="modal-shadow" />
     </div>
