@@ -1,8 +1,10 @@
 @import './assets/styles/vars.scss';
 
 * {
+  scroll-behavior: smooth;
   box-sizing: border-box;
 }
+
 body {
   background-color: orange;
 }
