@@ -2,9 +2,8 @@ import { KeyboardEvent, createRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { changeCardTitle } from '../../../redux/actions/cardsByIdActions';
 import { State } from '../../../redux/store';
-
-import './Header.scss';
 import { TextArea } from '../../Commons/TextArea/TextArea';
+import './Header.scss';
 
 const CardModalHeader = (props: CardModalHeaderProps) => {
   const [title, setTitle] = useState(props.title);

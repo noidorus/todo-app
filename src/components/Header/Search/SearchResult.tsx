@@ -1,11 +1,9 @@
 import { connect } from 'react-redux';
 import { createRef } from 'react';
 import { Link } from 'react-router-dom';
-import { State } from '../../redux/store';
-import { clearSearch } from '../../redux/actions/searchActions';
-import { useOnClickOutside } from '../../hooks/useOnClickOutside';
-
-import './SearchResult.scss';
+import { State } from '../../../redux/store';
+import { clearSearch } from '../../../redux/actions/searchActions';
+import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 
 const SearchResult = ({ searchResult, clearSearch }: SearchResultProps) => {
   const searchResultRef = createRef<HTMLUListElement>();
@@ -17,7 +15,7 @@ const SearchResult = ({ searchResult, clearSearch }: SearchResultProps) => {
 
   const elements = searchResult.map(({ card, list, board }) => {
     return (
-      <li className="result__item" key={card.id}>
+      <li key={card.id}>
         <Link className="result__link" to={`/${board.id}?cardId=${card.id}`}>
           <span>{card.title}</span>
           <span>

@@ -13,6 +13,7 @@ import { createCommentsList } from '../../../redux/actions/commentsActions';
 import { increaseCardNum } from '../../../redux/actions/boardsActions';
 
 import './List.scss';
+import classNames from 'classnames';
 
 const List = ({
   list,
@@ -52,25 +53,36 @@ const List = ({
     ));
   }, [list.cards]);
 
+  const classes = classNames({
+    list: true,
+    'adding-card': addingItem,
+  });
+
   return (
-    <div className="list" ref={listRef}>
+    <div className="list-wrapper" ref={listRef}>
       <h3>{list.title}</h3>
+
       <Droppable droppableId={list.id}>
         {(provided, snapshot) => (
-          <ul ref={provided.innerRef} className="list-cards">
-            {elements}
-            {provided.placeholder}
-          </ul>
+          <div className={classes}>
+            <ul ref={provided.innerRef} className="cards">
+              {elements}
+              {provided.placeholder}
+            </ul>
+
+            {addingItem && (
+              <AddItemForm
+                textareaClass={'card'}
+                placeholder="Type card title"
+                addItem={onAddCard}
+                closeForm={toggleAddingItem}
+              />
+            )}
+          </div>
         )}
       </Droppable>
-      {addingItem ? (
-        <AddItemForm
-          textareaClass={'card'}
-          placeholder="Type card title"
-          addItem={onAddCard}
-          closeForm={toggleAddingItem}
-        />
-      ) : (
+
+      {!addingItem && (
         <div className="add-card__btn" onClick={toggleAddingItem}>
           + <span>Create new card</span>
         </div>
