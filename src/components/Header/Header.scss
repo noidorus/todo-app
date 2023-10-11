@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+
+  &__link {
+    font-size: 18px;
+    padding: 4px 16px;
+    border: 1px solid black;
+    border-radius: 5px;
+    transition: all 0.3s linear;
+    background-color: var(--bg-color_500);
+    color: white;
+
+    &:hover {
+      transform: scale(0.95);
+      background-color: var(--bg-color_500-hover);
+    }
+  }
+
+  .search__wrapper {
+    position: relative;
+    width: 300px;
+  }
+}

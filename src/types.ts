@@ -1,5 +1,6 @@
 export interface BoardType {
   id: string;
+  cardNum: number;
   title: string;
   lists: string[];
 }
@@ -9,6 +10,7 @@ export interface ListType {
   title: string;
   cards: string[];
 }
+
 export interface TaskType {
   id: string;
   title: string;
@@ -22,6 +24,7 @@ export interface CardType {
   commentsId: string;
   priority: string;
   taskList: TaskType[];
+  cardNum: number;
   date: {
     createdDate: number;
     endDate: number | null;
@@ -37,3 +40,9 @@ export interface CommentType {
   pid: string;
   text: string;
 }
+
+export type SearchResult = {
+  card: CardType;
+  list: ListType;
+  board: BoardType;
+}[];

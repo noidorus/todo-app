@@ -10,13 +10,14 @@ export const SET_TIMER = 'SET_TIMER';
 export const PAUSE_TIMER = 'PAUSE_TIMER';
 export const RESET_TIMER = 'RESET_TIMER';
 
-export const addCardToCards = (
-  id: string,
-  title: string,
-  commentsId: string
-): AddCardToCards => ({
+export const addCardToCards = (card: {
+  id: string;
+  title: string;
+  cardNum: number;
+  commentsId: string;
+}): AddCardToCards => ({
   type: ADD_CARD_TO_CARDS,
-  payload: { id, title, commentsId },
+  payload: card,
 });
 
 export const changeCardTitle = (
@@ -88,7 +89,7 @@ export const resetTimer = (id: string): ResetTimer => ({
 
 interface AddCardToCards {
   type: typeof ADD_CARD_TO_CARDS;
-  payload: { id: string; title: string; commentsId: string };
+  payload: { id: string; title: string; commentsId: string; cardNum: number };
 }
 interface ChangeCardTitle {
   type: typeof CHANGE_CARD_TITLE;

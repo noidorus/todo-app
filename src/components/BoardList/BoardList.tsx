@@ -13,9 +13,10 @@ import './BoardList.scss';
 
 const BoardList = ({ boards, addBoard, createNewLists }: BoardsPageProps) => {
   const [addingItem, setAddingItem] = useState(false);
+
   const onAddBoard = (title: string) => {
     const newLists = [nanoid(10), nanoid(10), nanoid(10)];
-    addBoard({ id: nanoid(10), title, lists: newLists });
+    addBoard({ id: nanoid(10), title, lists: newLists, cardNum: 1 });
     createNewLists(newLists);
   };
 

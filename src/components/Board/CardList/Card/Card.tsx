@@ -1,19 +1,14 @@
+import { Link, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 import { State } from '../../../../redux/store';
 import { CardType } from '../../../../types';
-import { useModal } from '../../../Modal/ModalProvider';
-import { CardModal } from '../../../CardModal/CardModal';
 import { CardBadges } from './CardBadges';
 
 import './Card.scss';
 
 const Card = ({ card, index }: CardProps) => {
-  const { setModal } = useModal();
-
-  const onHandleClick = () => {
-    setModal(<CardModal card={card} />);
-  };
+  const location = useLocation();
 
   return (
     <Draggable draggableId={card.id} index={index}>
@@ -22,12 +17,16 @@ const Card = ({ card, index }: CardProps) => {
           ref={provided.innerRef}
           {...provided.draggableProps}
           {...provided.dragHandleProps}
-          onClick={onHandleClick}
+          className="card-wrapper"
         >
-          <div className="card">
+          <Link
+            className="card"
+            to={`/card/${card.id}`}
+            state={{ background: location }}
+          >
             <h4 className="card__title">{card.title}</h4>
             <CardBadges {...card} />
-          </div>
+          </Link>
         </li>
       )}
     </Draggable>

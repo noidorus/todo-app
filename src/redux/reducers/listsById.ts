@@ -30,13 +30,15 @@ export const listsByIdReducer: Reducer<ListbyIdState, ListByIdActions> = (
         },
         {} as ListbyIdState
       );
-
       return { ...state, ...newLists };
     case ADD_CARD_TO_LIST:
       const { cardId, listId } = payload;
       return {
         ...state,
-        [listId]: { ...state[listId], cards: [...state[listId].cards, cardId] },
+        [listId]: {
+          ...state[listId],
+          cards: [...state[listId].cards, cardId],
+        },
       };
     case MOVE_CARD:
       const { oldCardIndex, newCardIndex, sourceListId, destListId } = payload;

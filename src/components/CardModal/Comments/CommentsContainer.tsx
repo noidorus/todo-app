@@ -18,8 +18,6 @@ const CommentsContainer = ({
     return <div>Loading...</div>;
   }
 
-  console.log('render');
-
   return (
     <div className="comments">
       <h3 className="comments__title">Comments</h3>
@@ -32,14 +30,18 @@ const CommentsContainer = ({
 };
 
 export default connect(
-  ({ comments }: State, { commentsListId }: { commentsListId: string }) => {
+  ({ comments, cardsById }: State, { id }: { id: string }) => {
+    const commentsListId = cardsById[id].commentsId;
+
     return {
       comments: comments[commentsListId],
+      commentsListId: commentsListId,
     };
   }
 )(CommentsContainer);
 
 interface CommentsContainerProps {
+  id: string;
   commentsListId: string;
   comments: {
     [key: string]: CommentType;

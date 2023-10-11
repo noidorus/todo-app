@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { useState, useMemo, createRef } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { nanoid } from 'nanoid';
 import { State } from '../../../redux/store';
@@ -7,17 +8,19 @@ import AddItemForm from '../../AddItemForm/AddItemForm';
 import { addCardToList } from '../../../redux/actions/listByIdActions';
 import { addCardToCards } from '../../../redux/actions/cardsByIdActions';
 import Card from './Card/Card';
-
-import { useState, useMemo, createRef } from 'react';
-import './List.scss';
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 import { createCommentsList } from '../../../redux/actions/commentsActions';
+import { increaseCardNum } from '../../../redux/actions/boardsActions';
+
+import './List.scss';
 
 const List = ({
   list,
+  cardNum,
   addCardToList,
   addCardToCards,
   createCommentsList,
+  increaseCardNum,
 }: ListProps) => {
   const [addingItem, setAddingItem] = useState(false);
   const listRef = createRef<HTMLDivElement>();
@@ -26,11 +29,17 @@ const List = ({
   });
 
   const onAddCard = (title: string) => {
-    const cardId = nanoid(10);
-    const commentsId = nanoid(10);
-    addCardToList(cardId, list.id);
-    addCardToCards(cardId, title, commentsId);
-    createCommentsList(commentsId);
+    const card = {
+      id: nanoid(10),
+      commentsId: nanoid(10),
+      title,
+      cardNum: cardNum,
+    };
+
+    addCardToList(card.id, list.id);
+    addCardToCards(card);
+    createCommentsList(card.commentsId);
+    increaseCardNum(list.id);
   };
 
   const toggleAddingItem = () => {
@@ -51,21 +60,21 @@ const List = ({
           <ul ref={provided.innerRef} className="list-cards">
             {elements}
             {provided.placeholder}
-            {addingItem ? (
-              <AddItemForm
-                textareaClass={'card'}
-                placeholder="Type card title"
-                addItem={onAddCard}
-                closeForm={toggleAddingItem}
-              />
-            ) : (
-              <div className="add-card__btn" onClick={toggleAddingItem}>
-                + <span>Create new card</span>
-              </div>
-            )}
           </ul>
         )}
       </Droppable>
+      {addingItem ? (
+        <AddItemForm
+          textareaClass={'card'}
+          placeholder="Type card title"
+          addItem={onAddCard}
+          closeForm={toggleAddingItem}
+        />
+      ) : (
+        <div className="add-card__btn" onClick={toggleAddingItem}>
+          + <span>Create new card</span>
+        </div>
+      )}
     </div>
   );
 };
@@ -74,14 +83,21 @@ export default connect(
   ({ listById }: State, { listId }: OwnProps) => ({
     list: listById[listId],
   }),
-  { addCardToList, addCardToCards, createCommentsList }
+  { addCardToList, addCardToCards, createCommentsList, increaseCardNum }
 )(List);
 
 interface ListProps {
   list: ListType;
+  cardNum: number;
   addCardToList: (cardId: string, listId: string) => void;
-  addCardToCards: (id: string, title: string, commentsId: string) => void;
   createCommentsList: (id: string) => void;
+  increaseCardNum: (listId: string) => void;
+  addCardToCards: (card: {
+    id: string;
+    title: string;
+    cardNum: number;
+    commentsId: string;
+  }) => void;
 }
 interface OwnProps {
   listId: string;

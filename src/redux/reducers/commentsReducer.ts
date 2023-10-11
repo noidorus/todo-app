@@ -34,8 +34,6 @@ export const commentsReducer = (
         delete comments[id];
       });
 
-      // const arr = [...state[payload.id],];
-
       return { ...state, [payload.id]: comments };
     default:
       return state;

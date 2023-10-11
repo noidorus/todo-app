@@ -1,11 +1,14 @@
-import List from './CardList/List';
 import { DragDropContext, DropResult } from 'react-beautiful-dnd';
-import './Board.scss';
 import { connect } from 'react-redux';
 import { moveCard } from '../../redux/actions/listByIdActions';
+import List from './CardList/List';
 
-const Board = ({ lists, moveCard }: BoardProps) => {
-  const elements = lists.map((list) => <List key={list} listId={list} />);
+import './Board.scss';
+
+const Board = ({ lists, cardNum, moveCard }: BoardProps) => {
+  const elements = lists.map((list) => (
+    <List cardNum={cardNum} key={list} listId={list} />
+  ));
 
   const handleDragEnd = ({ source, destination }: DropResult) => {
     if (!destination) return;
@@ -34,6 +37,7 @@ export default connect(null, { moveCard })(Board);
 
 interface BoardProps {
   lists: string[];
+  cardNum: number;
   moveCard: (
     sourceListId: string,
     destListId: string,

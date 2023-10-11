@@ -1,27 +1,29 @@
-import { CardType } from '../../types';
-import Description from './Description/Description';
+import { useParams } from 'react-router-dom';
 import Header from './Header/Header';
-import './CardModal.scss';
+import Description from './Description/Description';
 import Sidebar from './Sidebar/Sidebar';
 import Badges from './Badges/Badges';
 import CheckList from './CheckList/CheckList';
 import CommentsContainer from './Comments/CommentsContainer';
+import './CardModal.scss';
 
-export const CardModal = ({ card }: CardModalProps) => {
+export const CardModal = () => {
+  const { id } = useParams();
+
+  if (!id) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="card-modal">
-      <Header id={card.id} />
+      <Header id={id} />
       <div className="main-col">
-        <Badges id={card.id} />
-        <Description id={card.id} />
-        <CheckList id={card.id} />
-        <CommentsContainer commentsListId={card.commentsId} />
+        <Badges id={id} />
+        <Description id={id} />
+        <CheckList id={id} />
+        <CommentsContainer id={id} />
       </div>
-      <Sidebar id={card.id} />
+      <Sidebar id={id} />
     </div>
   );
 };
-
-interface CardModalProps {
-  card: CardType;
-}

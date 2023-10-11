@@ -5,6 +5,7 @@ import { cardsByIdReducer } from './reducers/cardsByIdReducer';
 import { throttle } from '../helpers/helpers';
 import { editorReducer } from './reducers/editorResucer';
 import { commentsReducer } from './reducers/commentsReducer';
+import { searchReducer } from './reducers/searchReducer';
 
 const reducers = combineReducers({
   boards: boardsReducer,
@@ -12,6 +13,7 @@ const reducers = combineReducers({
   cardsById: cardsByIdReducer,
   editor: editorReducer,
   comments: commentsReducer,
+  search: searchReducer,
 });
 
 const saveState = (state: State) => {
