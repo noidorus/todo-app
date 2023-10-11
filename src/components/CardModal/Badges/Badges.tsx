@@ -8,6 +8,8 @@ import { TimerBadge } from '../../Badges/TimerBadge/TimerBadge';
 import { CardType } from '../../../types';
 
 const Badges = ({ priority, date, timer }: BadgesProps) => {
+  console.log('render');
+
   return (
     <div className="modal-badges">
       <DateBadge date={date} />
@@ -18,7 +20,13 @@ const Badges = ({ priority, date, timer }: BadgesProps) => {
 };
 
 export default connect(({ cardsById }: State, { id }: { id: string }) => ({
-  ...cardsById[id],
+  priority: cardsById[id].priority,
+  date: cardsById[id].date,
+  timer: cardsById[id].timer,
 }))(Badges);
 
-interface BadgesProps extends CardType {}
+interface BadgesProps {
+  priority: CardType['priority'];
+  date: CardType['date'];
+  timer: CardType['timer'];
+}

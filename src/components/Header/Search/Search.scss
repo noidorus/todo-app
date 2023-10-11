@@ -6,7 +6,7 @@
   width: 300px;
   max-height: 100%;
 
-  .search__input {
+  .search__input-wrapper {
     position: relative;
 
     &::before {
@@ -18,7 +18,7 @@
       z-index: 1;
     }
 
-    input {
+    .search__input {
       background-color: var(--bg-color_200);
       width: 100%;
       box-shadow: -1px 1px 8px -2px rgba(0, 0, 0, 0.32);

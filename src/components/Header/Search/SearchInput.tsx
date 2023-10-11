@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { State } from '../../../redux/store';
 import {
   changeSearchValue,
+  clearSearch,
   setSearchResult,
 } from '../../../redux/actions/searchActions';
 import { useDebounce } from '../../../hooks/useDebounce';
@@ -47,7 +48,6 @@ const Search = ({
 
             return [...acc, { card, list, board }];
           }
-
           return [...acc];
         },
         []
@@ -60,8 +60,12 @@ const Search = ({
   }, [query]);
 
   return (
-    <div className="search__input" onClick={() => searchRef.current?.focus()}>
+    <div
+      className="search__input-wrapper"
+      onClick={() => searchRef.current?.focus()}
+    >
       <input
+        className="search__input"
         ref={searchRef}
         placeholder="Search"
         type="text"
@@ -79,7 +83,7 @@ export default connect(
     cardsObj: cardsById,
     boards: boards.boards,
   }),
-  { changeSearchValue, setSearchResult }
+  { changeSearchValue, setSearchResult, clearSearch }
 )(Search);
 
 interface SearchResultProps {
@@ -89,4 +93,5 @@ interface SearchResultProps {
   boards: State['boards']['boards'];
   changeSearchValue: (searchValue: string) => void;
   setSearchResult: (result: State['search']['searchResult']) => void;
+  clearSearch: () => void;
 }

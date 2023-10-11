@@ -9,13 +9,21 @@ const SearchResult = ({ searchResult, clearSearch }: SearchResultProps) => {
   const searchResultRef = createRef<HTMLUListElement>();
 
   useOnClickOutside(searchResultRef, (e) => {
-    const target = e.target as HTMLElement;
-    if (!target.classList.contains('search__input')) clearSearch();
+    const { classList } = e.target as HTMLElement;
+    if (
+      !classList.contains('search__input-wrapper') ||
+      !classList.contains('search__input')
+    )
+      clearSearch();
   });
+
+  const handleClick = () => {
+    clearSearch();
+  };
 
   const elements = searchResult.map(({ card, list, board }) => {
     return (
-      <li key={card.id}>
+      <li key={card.id} onClick={handleClick}>
         <Link className="result__link" to={`/${board.id}?cardId=${card.id}`}>
           <span>{card.title}</span>
           <span>
