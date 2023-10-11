@@ -25,7 +25,6 @@ function App() {
         <Routes>
           <Route path="/" element={<ModalLayout />}>
             <Route path="/card/:id" element={<CardModal />} />
-            {/* <Route path="/card/:id" element={<ModalPage />} /> */}
           </Route>
         </Routes>
       )}

@@ -1,7 +1,10 @@
-import { BoardType, CardType, ListType } from '../../types';
-
-const CHANGE_SEARCH_VALUE = 'CHANGE_SEARCH_VALUE';
-const SET_SEARCH_RESULT = 'SET_SEARCH_RESULT';
+import { SearchResult } from '../../types';
+import {
+  CHANGE_SEARCH_VALUE,
+  CLEAR_SEARCH,
+  SET_SEARCH_RESULT,
+  SearchActions,
+} from '../actions/searchActions';
 
 const initialState = {
   searchValue: '',
@@ -10,7 +13,7 @@ const initialState = {
 
 interface SeacrhState {
   searchValue: string;
-  searchResult: { card: CardType; list: ListType; board: BoardType }[];
+  searchResult: SearchResult;
 }
 
 export const searchReducer = (
@@ -22,29 +25,9 @@ export const searchReducer = (
       return { ...state, searchValue: payload.searchValue };
     case SET_SEARCH_RESULT:
       return { ...state, searchResult: payload.searchResult };
+    case CLEAR_SEARCH:
+      return { ...state, searchValue: '', searchResult: [] };
     default:
       return state;
   }
 };
-
-export const changeSearchValue = (searchValue: string): ChangeSearchValue => ({
-  type: CHANGE_SEARCH_VALUE,
-  payload: { searchValue },
-});
-
-export const setSearchResult = (searchResult: SeacrhState['searchResult']) => ({
-  type: SET_SEARCH_RESULT,
-  payload: { searchResult },
-});
-
-interface ChangeSearchValue {
-  type: typeof CHANGE_SEARCH_VALUE;
-  payload: { searchValue: string };
-}
-
-interface SetSearchResult {
-  type: typeof SET_SEARCH_RESULT;
-  payload: { searchResult: SeacrhState['searchResult'] };
-}
-
-type SearchActions = ChangeSearchValue | SetSearchResult;

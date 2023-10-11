@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { useState, useMemo, createRef } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { nanoid } from 'nanoid';
 import { State } from '../../../redux/store';
@@ -7,12 +8,11 @@ import AddItemForm from '../../AddItemForm/AddItemForm';
 import { addCardToList } from '../../../redux/actions/listByIdActions';
 import { addCardToCards } from '../../../redux/actions/cardsByIdActions';
 import Card from './Card/Card';
-
-import { useState, useMemo, createRef } from 'react';
-import './List.scss';
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 import { createCommentsList } from '../../../redux/actions/commentsActions';
 import { increaseCardNum } from '../../../redux/actions/boardsActions';
+
+import './List.scss';
 
 const List = ({
   list,
@@ -60,21 +60,21 @@ const List = ({
           <ul ref={provided.innerRef} className="list-cards">
             {elements}
             {provided.placeholder}
-            {addingItem ? (
-              <AddItemForm
-                textareaClass={'card'}
-                placeholder="Type card title"
-                addItem={onAddCard}
-                closeForm={toggleAddingItem}
-              />
-            ) : (
-              <div className="add-card__btn" onClick={toggleAddingItem}>
-                + <span>Create new card</span>
-              </div>
-            )}
           </ul>
         )}
       </Droppable>
+      {addingItem ? (
+        <AddItemForm
+          textareaClass={'card'}
+          placeholder="Type card title"
+          addItem={onAddCard}
+          closeForm={toggleAddingItem}
+        />
+      ) : (
+        <div className="add-card__btn" onClick={toggleAddingItem}>
+          + <span>Create new card</span>
+        </div>
+      )}
     </div>
   );
 };

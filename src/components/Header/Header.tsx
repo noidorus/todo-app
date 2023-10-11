@@ -9,8 +9,10 @@ export const Header = () => {
   return (
     <header className="header">
       <img width={40} src={logo} alt="" />
-      <Search />
-      <SearchResult />
+      <div className="search__wrapper">
+        <Search />
+        <SearchResult />
+      </div>
       <NavLink className="header__link" to="/">
         Boards
       </NavLink>

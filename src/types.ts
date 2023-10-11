@@ -40,3 +40,9 @@ export interface CommentType {
   pid: string;
   text: string;
 }
+
+export type SearchResult = {
+  card: CardType;
+  list: ListType;
+  board: BoardType;
+}[];

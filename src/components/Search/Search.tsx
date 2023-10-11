@@ -1,11 +1,12 @@
-import { ChangeEvent, useEffect, useMemo } from 'react';
+import { ChangeEvent, createRef, useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { State } from '../../redux/store';
 import {
   changeSearchValue,
   setSearchResult,
-} from '../../redux/reducers/searchReducer';
+} from '../../redux/actions/searchActions';
 import { useDebounce } from '../../hooks/useDebounce';
+import './Search.scss';
 
 const Search = ({
   searchValue,
@@ -15,12 +16,13 @@ const Search = ({
   changeSearchValue,
   setSearchResult,
 }: SearchResultProps) => {
-  const query = useDebounce(searchValue, 700);
+  const query = useDebounce(searchValue.toLowerCase(), 700);
   const cards = useMemo(() => Object.values(cardsObj), [cardsObj]);
   const lists = useMemo(() => Object.values(listsObj), [listsObj]);
+  const searchRef = createRef<HTMLInputElement>();
 
   const handleChange = ({ target }: ChangeEvent<HTMLInputElement>) => {
-    changeSearchValue(target.value.toLowerCase());
+    changeSearchValue(target.value);
   };
 
   useEffect(() => {
@@ -59,8 +61,15 @@ const Search = ({
   }, [query]);
 
   return (
-    <div>
-      <input type="text" value={searchValue} onChange={handleChange} />
+    <div className="search" onClick={() => searchRef.current?.focus()}>
+      <input
+        ref={searchRef}
+        placeholder="Search"
+        className="search__input"
+        type="text"
+        value={searchValue}
+        onChange={handleChange}
+      />
     </div>
   );
 };

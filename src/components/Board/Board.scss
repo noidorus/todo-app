@@ -1,5 +1,7 @@
 .lists {
+  // height: 100%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 30px;
+  // overflow-y: hidden;
 }
