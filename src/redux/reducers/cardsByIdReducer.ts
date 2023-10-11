@@ -13,6 +13,7 @@ import {
   SET_TIMER,
   PAUSE_TIMER,
   RESET_TIMER,
+  ADD_FILE,
 } from '../actions/cardsByIdActions';
 
 interface CardsByIdState {
@@ -30,6 +31,7 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         description: '',
         priority: '±0',
         taskList: [],
+        files: [],
         timer: {
           startedTime: null,
           duration: 0,
@@ -133,6 +135,15 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
             duration: 0,
             startedTime: null,
           },
+        },
+      };
+    case ADD_FILE:
+      console.log(payload.file);
+      return {
+        ...state,
+        [payload.id]: {
+          ...state[payload.id],
+          files: [...state[payload.id].files, { file: payload.file }],
         },
       };
     default:

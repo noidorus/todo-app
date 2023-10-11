@@ -25,6 +25,7 @@ export interface CardType {
   priority: string;
   taskList: TaskType[];
   cardNum: number;
+  files: { file: Blob }[];
   date: {
     createdDate: number;
     endDate: number | null;

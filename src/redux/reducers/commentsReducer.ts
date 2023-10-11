@@ -1,3 +1,4 @@
+import { Reducer } from 'redux';
 import { CommentType } from '../../types';
 import {
   CommentsActions,
@@ -12,9 +13,9 @@ interface CommentsState {
   };
 }
 
-export const commentsReducer = (
-  state: CommentsState = {},
-  { type, payload }: CommentsActions
+export const commentsReducer: Reducer<CommentsState, CommentsActions> = (
+  state = {},
+  { type, payload }
 ) => {
   switch (type) {
     case CREATE_COMMENTS_LIST:

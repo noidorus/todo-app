@@ -8,8 +8,6 @@ import { TimerBadge } from '../../Badges/TimerBadge/TimerBadge';
 import { CardType } from '../../../types';
 
 const Badges = ({ priority, date, timer }: BadgesProps) => {
-  console.log('render');
-
   return (
     <div className="modal-badges">
       <DateBadge date={date} />

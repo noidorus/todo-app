@@ -1,3 +1,4 @@
+import { Reducer } from 'redux';
 import { SearchResult } from '../../types';
 import {
   CHANGE_SEARCH_VALUE,
@@ -16,9 +17,9 @@ interface SeacrhState {
   searchResult: SearchResult;
 }
 
-export const searchReducer = (
-  state: SeacrhState = initialState,
-  { type, payload }: SearchActions
+export const searchReducer: Reducer<SeacrhState, SearchActions> = (
+  state = initialState,
+  { type, payload }
 ) => {
   switch (type) {
     case CHANGE_SEARCH_VALUE:

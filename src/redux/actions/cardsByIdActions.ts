@@ -9,6 +9,7 @@ export const DELETE_TASK = 'DELETE_TASK';
 export const SET_TIMER = 'SET_TIMER';
 export const PAUSE_TIMER = 'PAUSE_TIMER';
 export const RESET_TIMER = 'RESET_TIMER';
+export const ADD_FILE = 'ADD_IMAGE';
 
 export const addCardToCards = (card: {
   id: string;
@@ -87,6 +88,11 @@ export const resetTimer = (id: string): ResetTimer => ({
   payload: { id },
 });
 
+export const addFile = (id: string, file: Blob) => ({
+  type: ADD_FILE,
+  payload: { id, file },
+});
+
 interface AddCardToCards {
   type: typeof ADD_CARD_TO_CARDS;
   payload: { id: string; title: string; commentsId: string; cardNum: number };
@@ -131,6 +137,10 @@ interface ResetTimer {
   type: typeof RESET_TIMER;
   payload: { id: string };
 }
+interface AddFile {
+  type: typeof ADD_FILE;
+  payload: { id: string; file: Blob };
+}
 
 export type CardsByIdActions =
   | AddCardToCards
@@ -143,4 +153,5 @@ export type CardsByIdActions =
   | DeleteTask
   | SetTimer
   | PauseTimer
-  | ResetTimer;
+  | ResetTimer
+  | AddFile;

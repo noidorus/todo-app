@@ -6,6 +6,7 @@ import Badges from './Badges/Badges';
 import CheckList from './CheckList/CheckList';
 import CommentsContainer from './Comments/CommentsContainer';
 import './CardModal.scss';
+import Files from './Files/Files';
 
 export const CardModal = () => {
   const { id } = useParams();
@@ -20,6 +21,7 @@ export const CardModal = () => {
       <div className="main-col">
         <Badges id={id} />
         <Description id={id} />
+        <Files id={id} />
         <CheckList id={id} />
         <CommentsContainer id={id} />
       </div>
