@@ -1,12 +1,11 @@
 import { ChangeEvent, createRef, useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
-import { State } from '../../redux/store';
+import { State } from '../../../redux/store';
 import {
   changeSearchValue,
   setSearchResult,
-} from '../../redux/actions/searchActions';
-import { useDebounce } from '../../hooks/useDebounce';
-import './Search.scss';
+} from '../../../redux/actions/searchActions';
+import { useDebounce } from '../../../hooks/useDebounce';
 
 const Search = ({
   searchValue,
@@ -61,11 +60,10 @@ const Search = ({
   }, [query]);
 
   return (
-    <div className="search" onClick={() => searchRef.current?.focus()}>
+    <div className="search__input" onClick={() => searchRef.current?.focus()}>
       <input
         ref={searchRef}
         placeholder="Search"
-        className="search__input"
         type="text"
         value={searchValue}
         onChange={handleChange}
