@@ -1,11 +1,15 @@
 import { useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { connect } from 'react-redux';
+import { nanoid } from 'nanoid';
 import { State } from '../../../../redux/store';
-// import classNames from 'classnames';
 import { setError, setFile } from '../../../../redux/actions/uploadFileActions';
+import { addFileToCard } from '../../../../redux/actions/cardsByIdActions';
+import { EditButtons } from '../../../Commons/EditButtons/EditButtons';
+import { addFile } from '../../../../redux/actions/filesActions';
+import { FileType } from '../../../../types';
+
 import './UploadFilePopUp.scss';
-import { addFile } from '../../../../redux/actions/cardsByIdActions';
 
 const UploadFilePopUp = ({
   file,
@@ -13,6 +17,8 @@ const UploadFilePopUp = ({
   id,
   setFile,
   setError,
+  addFileToCard,
+  closePopUp,
   addFile,
 }: UploadFilePopUpProps) => {
   const maxFiles = 1;
@@ -25,10 +31,24 @@ const UploadFilePopUp = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const uploadImage = async (file: File) => {
-    const arrayBuffer = await file.arrayBuffer();
-    const blob = new Blob([new Uint8Array(arrayBuffer)], { type: file.type });
-    addFile(id, blob);
+  const onClickButton = () => {
+    if (file) {
+      const reader = new FileReader();
+      reader.addEventListener('load', () => {
+        if (reader.result) {
+          const file = {
+            id: nanoid(10),
+            url: reader.result as string,
+          };
+
+          addFileToCard(id, file.id);
+          addFile(file);
+          setFile(null);
+          if (closePopUp) closePopUp();
+        }
+      });
+      reader.readAsDataURL(file);
+    }
   };
 
   const onDrop = (acceptedFiles: File[]) => {
@@ -38,7 +58,6 @@ const UploadFilePopUp = ({
           preview: URL.createObjectURL(acceptedFiles[0]),
         })
       );
-      uploadImage(acceptedFiles[0]);
     } else {
       setError(`Max files count: ${maxFiles}`);
     }
@@ -51,6 +70,10 @@ const UploadFilePopUp = ({
     maxFiles,
     onDrop: onDrop,
   });
+
+  const onClickClose = () => {
+    if (closePopUp) closePopUp();
+  };
 
   return (
     <div className="upload-file__popup">
@@ -66,6 +89,13 @@ const UploadFilePopUp = ({
       </div>
       {/*     
       <p>{error}</p> */}
+
+      <EditButtons
+        btnDisabled={!file}
+        name="Upload"
+        onClickClose={onClickClose}
+        onClickBtn={onClickButton}
+      />
     </div>
   );
 };
@@ -74,14 +104,16 @@ export default connect(
   ({ uploadFile }: State) => ({
     ...uploadFile,
   }),
-  { setFile, setError, addFile }
+  { setFile, setError, addFileToCard, addFile }
 )(UploadFilePopUp);
 
 interface UploadFilePopUpProps {
   id: string;
   error: string;
   file: State['uploadFile']['file'];
+  closePopUp?: () => void;
   setFile: (file: File | null) => void;
   setError: (error: string) => void;
-  addFile: (id: string, file: Blob) => void;
+  addFileToCard: (id: string, file: string) => void;
+  addFile: (file: FileType) => void;
 }

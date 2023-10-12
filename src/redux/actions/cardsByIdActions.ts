@@ -9,7 +9,8 @@ export const DELETE_TASK = 'DELETE_TASK';
 export const SET_TIMER = 'SET_TIMER';
 export const PAUSE_TIMER = 'PAUSE_TIMER';
 export const RESET_TIMER = 'RESET_TIMER';
-export const ADD_FILE = 'ADD_IMAGE';
+export const ADD_FILE_TO_CARD = 'ADD_IMAGE';
+export const DELETE_FILE_FROM_CARD = 'DELETE_FILE_FROM_CARD';
 
 export const addCardToCards = (card: {
   id: string;
@@ -88,9 +89,17 @@ export const resetTimer = (id: string): ResetTimer => ({
   payload: { id },
 });
 
-export const addFile = (id: string, file: Blob) => ({
-  type: ADD_FILE,
-  payload: { id, file },
+export const addFileToCard = (id: string, fileId: string): AddFileToCard => ({
+  type: ADD_FILE_TO_CARD,
+  payload: { id, fileId },
+});
+
+export const deleteFileFromCard = (
+  id: string,
+  fileId: string
+): DeleteFileFromCard => ({
+  type: DELETE_FILE_FROM_CARD,
+  payload: { id, fileId },
 });
 
 interface AddCardToCards {
@@ -137,9 +146,13 @@ interface ResetTimer {
   type: typeof RESET_TIMER;
   payload: { id: string };
 }
-interface AddFile {
-  type: typeof ADD_FILE;
-  payload: { id: string; file: Blob };
+interface AddFileToCard {
+  type: typeof ADD_FILE_TO_CARD;
+  payload: { id: string; fileId: string };
+}
+interface DeleteFileFromCard {
+  type: typeof DELETE_FILE_FROM_CARD;
+  payload: { id: string; fileId: string };
 }
 
 export type CardsByIdActions =
@@ -154,4 +167,5 @@ export type CardsByIdActions =
   | SetTimer
   | PauseTimer
   | ResetTimer
-  | AddFile;
+  | AddFileToCard
+  | DeleteFileFromCard;

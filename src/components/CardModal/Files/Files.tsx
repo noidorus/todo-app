@@ -1,19 +1,18 @@
 import { connect } from 'react-redux';
 import { State } from '../../../redux/store';
-import { useEffect } from 'react';
+import FilesItem from './FilesItem/FilesItem';
+
+import './Files.scss';
 
 const Files = ({ id, files }: FilesProps) => {
-  const filesUrl = URL.createObjectURL(files[0].file);
-
-  // useEffect(() => {
-  //   return () => {
-  //     URL.revokeObjectURL(filesUrl);
-  //   };
-  // });
+  const elements = files.map((file) => {
+    return <FilesItem key={file} cardId={id} fileId={file} />;
+  });
 
   return (
-    <div>
-      <img src={filesUrl} alt="card file" />
+    <div className="files">
+      <h3 className="files__title">Files</h3>
+      <ul className="files__list">{elements}</ul>
     </div>
   );
 };
@@ -24,5 +23,5 @@ export default connect(({ cardsById }: State, { id }: { id: string }) => ({
 
 interface FilesProps {
   id: string;
-  files: { file: Blob }[];
+  files: string[];
 }

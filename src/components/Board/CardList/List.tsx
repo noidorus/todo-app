@@ -80,7 +80,6 @@ const List = ({
           </div>
         )}
       </Droppable>
-
       {!addingItem && (
         <div className="add-card__btn" onClick={toggleAddingItem}>
           + <span>Create new card</span>
