@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { Controls } from './Controls/Controls';
 import './Comments.scss';
 
-const Comment = ({ comment, commentListId }: CommentProps) => {
+const Comment = ({ comment, cardId }: CommentProps) => {
   const idsToDelete = useMemo(() => {
     const countReplies = (comment: Node) => {
       let childrenArr: string[] = [comment.id];
@@ -18,27 +18,19 @@ const Comment = ({ comment, commentListId }: CommentProps) => {
   return (
     <li className="comment">
       <h4 className="comment__title">{comment.text}</h4>
-      <Controls
-        commentsListId={commentListId}
-        pid={comment.id}
-        idsToDelete={idsToDelete}
-      />
-      <Comments comments={comment.children} commentsListId={commentListId} />
+      <Controls cardId={cardId} pid={comment.id} idsToDelete={idsToDelete} />
+      <Comments comments={comment.children} cardId={cardId} />
     </li>
   );
 };
 
-export const Comments = ({ comments, commentsListId }: CommentsProps) => {
+export const Comments = ({ comments, cardId }: CommentsProps) => {
   return (
     <>
       {Boolean(comments.length) && (
         <ul className="comments__list">
           {comments.map((comment) => (
-            <Comment
-              key={comment.id}
-              commentListId={commentsListId}
-              comment={comment}
-            />
+            <Comment key={comment.id} cardId={cardId} comment={comment} />
           ))}
         </ul>
       )}
@@ -47,10 +39,10 @@ export const Comments = ({ comments, commentsListId }: CommentsProps) => {
 };
 
 interface CommentProps {
-  commentListId: string;
+  cardId: string;
   comment: Node;
 }
 interface CommentsProps {
-  commentsListId: string;
+  cardId: string;
   comments: Node[];
 }

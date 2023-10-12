@@ -39,11 +39,9 @@ const Search = ({
           );
 
           if (includes) {
-            const list = lists.find((list) =>
-              list.cards.some((id) => id === card.id)
-            )!;
+            const list = lists.find((list) => list.cards.includes(card.id))!;
             const board = boards.find((board) =>
-              board.lists.some((el) => el === list.id)
+              board.lists.includes(list.id)
             )!;
 
             return [...acc, { card, list, board }];

@@ -15,6 +15,8 @@ import {
   RESET_TIMER,
   ADD_FILE_TO_CARD,
   DELETE_FILE_FROM_CARD,
+  ADD_COMMENT_TO_CARD,
+  DELETE_COMMENTS_FROM_CARD,
 } from '../actions/cardsByIdActions';
 
 interface CardsByIdState {
@@ -33,6 +35,7 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         priority: '±0',
         taskList: [],
         files: [],
+        comments: [],
         timer: {
           startedTime: null,
           duration: 0,
@@ -156,6 +159,26 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         [payload.id]: {
           ...state[payload.id],
           files,
+        },
+      };
+    case ADD_COMMENT_TO_CARD:
+      return {
+        ...state,
+        [payload.id]: {
+          ...state[payload.id],
+          comments: [...state[payload.id].comments, payload.commentId],
+        },
+      };
+    case DELETE_COMMENTS_FROM_CARD:
+      const comments = state[payload.id].comments.filter(
+        (id) => !payload.commentsIds.includes(id)
+      );
+
+      return {
+        ...state,
+        [payload.id]: {
+          ...state[payload.id],
+          comments,
         },
       };
     default:

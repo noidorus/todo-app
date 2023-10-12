@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Draggable } from 'react-beautiful-dnd';
 import { State } from '../../../../redux/store';
 import { CardType } from '../../../../types';
-import { CardBadges } from './CardBadges';
+import { Badges } from '../../../Badges/Badges';
 
 import './Card.scss';
 
@@ -25,7 +25,13 @@ const Card = ({ card, index }: CardProps) => {
             state={{ background: location }}
           >
             <h4 className="card__title">{card.title}</h4>
-            <CardBadges {...card} />
+            <Badges
+              date={card.date}
+              priority={card.priority}
+              taskList={card.taskList}
+              description={card.description}
+              timer={card.timer}
+            />
           </Link>
         </li>
       )}

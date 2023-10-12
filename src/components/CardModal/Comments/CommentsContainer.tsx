@@ -1,18 +1,20 @@
 import { connect } from 'react-redux';
 import { useMemo } from 'react';
-import { CommentType } from '../../../types';
 import { State } from '../../../redux/store';
 import { selectGroupedComments } from '../../../redux/selectors/commentsSelectors';
 import { Comments } from './Comments';
 import { AddComment } from './AddComment/AddComment';
 
 const CommentsContainer = ({
-  commentsListId,
-  comments,
+  id,
+  commentsById,
+  ...props
 }: CommentsContainerProps) => {
   const nodeList = useMemo(() => {
-    return selectGroupedComments(Object.values(comments));
-  }, [comments]);
+    const comments = props.comments.map((id) => commentsById[id]);
+    return selectGroupedComments(comments, id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [props.comments]);
 
   if (!nodeList) {
     return <div>Loading...</div>;
@@ -21,29 +23,20 @@ const CommentsContainer = ({
   return (
     <div className="comments">
       <h3 className="comments__title">Comments</h3>
-      <AddComment commentsListId={commentsListId} />
+      <AddComment cardId={id} />
       <div className="comments__content">
-        <Comments comments={nodeList} commentsListId={commentsListId} />
+        <Comments comments={nodeList} cardId={id} />
       </div>
     </div>
   );
 };
 
-export default connect(
-  ({ comments, cardsById }: State, { id }: { id: string }) => {
-    const commentsListId = cardsById[id].commentsId;
-
-    return {
-      comments: comments[commentsListId],
-      commentsListId: commentsListId,
-    };
-  }
-)(CommentsContainer);
+export default connect(({ commentsById }: State) => ({
+  commentsById,
+}))(CommentsContainer);
 
 interface CommentsContainerProps {
   id: string;
-  commentsListId: string;
-  comments: {
-    [key: string]: CommentType;
-  };
+  comments: string[];
+  commentsById: State['commentsById'];
 }

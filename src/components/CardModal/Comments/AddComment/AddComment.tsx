@@ -4,8 +4,9 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import AddItemForm from '../../../AddItemForm/AddItemForm';
 import './AddComment.scss';
+import { addCommentToCard } from '../../../../redux/actions/cardsByIdActions';
 
-export const AddComment = ({ commentsListId }: AddCommentProps) => {
+export const AddComment = ({ cardId }: AddCommentProps) => {
   const [formVisible, setFormVisible] = useState(false);
   const dispatch = useDispatch();
 
@@ -14,8 +15,9 @@ export const AddComment = ({ commentsListId }: AddCommentProps) => {
   };
 
   const handleAddItem = (text: string) => {
-    const comment = { id: nanoid(10), text, pid: 'root' };
-    dispatch(addComment(commentsListId, comment));
+    const comment = { id: nanoid(10), text, pid: cardId };
+    dispatch(addCommentToCard(cardId, comment.id));
+    dispatch(addComment(comment));
   };
 
   return (
@@ -37,5 +39,5 @@ export const AddComment = ({ commentsListId }: AddCommentProps) => {
 };
 
 interface AddCommentProps {
-  commentsListId: string;
+  cardId: string;
 }

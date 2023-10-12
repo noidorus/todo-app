@@ -8,12 +8,12 @@ import {
   deleteComments,
 } from '../../../../redux/actions/commentsActions';
 import './Controls.scss';
+import {
+  addCommentToCard,
+  deleteCommentsFromCard,
+} from '../../../../redux/actions/cardsByIdActions';
 
-export const Controls = ({
-  pid,
-  commentsListId,
-  idsToDelete,
-}: ControlsProps) => {
+export const Controls = ({ pid, cardId, idsToDelete }: ControlsProps) => {
   const [addingComment, setAddingComment] = useState(false);
   const dispatch = useDispatch();
 
@@ -22,7 +22,8 @@ export const Controls = ({
   };
 
   const deleteComment = () => {
-    dispatch(deleteComments(commentsListId, idsToDelete));
+    dispatch(deleteCommentsFromCard(cardId, idsToDelete));
+    dispatch(deleteComments(idsToDelete));
   };
 
   const { openPopUp, popUp } = useConfirmationPopUp({
@@ -36,7 +37,8 @@ export const Controls = ({
       text,
       pid,
     };
-    dispatch(addComment(commentsListId, comment));
+    dispatch(addCommentToCard(cardId, comment.id));
+    dispatch(addComment(comment));
   };
 
   return (
@@ -69,6 +71,6 @@ export const Controls = ({
 
 interface ControlsProps {
   pid: string;
-  commentsListId: string;
+  cardId: string;
   idsToDelete: string[];
 }

@@ -30,7 +30,7 @@ export const FilesItem = ({
   };
 
   const handleClickItem = (e: MouseEvent) => {
-    console.log('event item');
+    console.log('show big image');
   };
 
   return (

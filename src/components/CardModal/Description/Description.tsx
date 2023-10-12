@@ -92,8 +92,7 @@ interface DescriptionProps {
 }
 
 export default connect(
-  ({ cardsById, editor }: State, { id }: { id: string }) => ({
-    description: cardsById[id].description,
+  ({ editor }: State, { id }: { id: string }) => ({
     ...editor,
   }),
   { setCardDesc, setEditorVisible, setEditorContent }

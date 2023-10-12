@@ -11,12 +11,13 @@ export const PAUSE_TIMER = 'PAUSE_TIMER';
 export const RESET_TIMER = 'RESET_TIMER';
 export const ADD_FILE_TO_CARD = 'ADD_IMAGE';
 export const DELETE_FILE_FROM_CARD = 'DELETE_FILE_FROM_CARD';
+export const ADD_COMMENT_TO_CARD = 'ADD_COMMENT_TO_CARD';
+export const DELETE_COMMENTS_FROM_CARD = 'DELETE_COMMENTS_FROM_CARD';
 
 export const addCardToCards = (card: {
   id: string;
   title: string;
   cardNum: number;
-  commentsId: string;
 }): AddCardToCards => ({
   type: ADD_CARD_TO_CARDS,
   payload: card,
@@ -102,9 +103,25 @@ export const deleteFileFromCard = (
   payload: { id, fileId },
 });
 
+export const addCommentToCard = (
+  id: string,
+  commentId: string
+): AddCommentToCard => ({
+  type: ADD_COMMENT_TO_CARD,
+  payload: { id, commentId },
+});
+
+export const deleteCommentsFromCard = (
+  id: string,
+  commentsIds: string[]
+): DeleteCommentsFromCard => ({
+  type: DELETE_COMMENTS_FROM_CARD,
+  payload: { id, commentsIds },
+});
+
 interface AddCardToCards {
   type: typeof ADD_CARD_TO_CARDS;
-  payload: { id: string; title: string; commentsId: string; cardNum: number };
+  payload: { id: string; title: string; cardNum: number };
 }
 interface ChangeCardTitle {
   type: typeof CHANGE_CARD_TITLE;
@@ -154,6 +171,14 @@ interface DeleteFileFromCard {
   type: typeof DELETE_FILE_FROM_CARD;
   payload: { id: string; fileId: string };
 }
+interface AddCommentToCard {
+  type: typeof ADD_COMMENT_TO_CARD;
+  payload: { id: string; commentId: string };
+}
+interface DeleteCommentsFromCard {
+  type: typeof DELETE_COMMENTS_FROM_CARD;
+  payload: { id: string; commentsIds: string[] };
+}
 
 export type CardsByIdActions =
   | AddCardToCards
@@ -168,4 +193,6 @@ export type CardsByIdActions =
   | PauseTimer
   | ResetTimer
   | AddFileToCard
-  | DeleteFileFromCard;
+  | DeleteFileFromCard
+  | AddCommentToCard
+  | DeleteCommentsFromCard;

@@ -24,7 +24,7 @@ export const ConfirmationPopUp = ({
   return (
     <div ref={popUpRef} className="confirmation__pop-up">
       <h4>Delete {name}</h4>
-      <span>The {name} is permanently deleted.</span>
+      <span>The {name} will be permanently deleted.</span>
       <span>Cancellation is not possible.</span>
       <div className="confirmation-btns">
         <Button class="btn-red" name="Delete" onClick={handleClickConfirm} />
