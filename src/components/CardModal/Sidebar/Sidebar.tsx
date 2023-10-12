@@ -13,6 +13,7 @@ import { SidebarButtonLayout } from './SidebarButtonLayout';
 import './Sidebar.scss';
 import { TimerPopUp } from './TimerPopUp/TimerPopUp';
 import { CardType } from '../../../types';
+import UploadFilePopUp from './UploadFilePopUp/UploadFilePopUp';
 
 const Sidebar = (props: SidebarProps) => {
   return (
@@ -41,6 +42,10 @@ const Sidebar = (props: SidebarProps) => {
           pauseTimer={props.pauseTimer}
           resetTimer={props.resetTimer}
         />
+      </SidebarButtonLayout>
+
+      <SidebarButtonLayout name="Upload file">
+        <UploadFilePopUp id={props.id} />
       </SidebarButtonLayout>
     </ul>
   );

@@ -13,12 +13,12 @@
   .list {
     overflow-y: auto;
     max-height: 60vh;
-
     &.adding-card {
       max-height: 65vh;
     }
 
     .cards {
+      min-height: 5px;
       list-style: none;
       display: flex;
       flex-direction: column;
@@ -38,7 +38,7 @@
   }
 
   .add-card__btn {
-    margin-top: 10px;
+    margin-top: 5px;
     padding: 10px;
     color: #8fa5b2;
     border-radius: 0 0 10px 10px;

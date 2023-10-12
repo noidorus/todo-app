@@ -25,6 +25,7 @@ export interface CardType {
   priority: string;
   taskList: TaskType[];
   cardNum: number;
+  files: string[];
   date: {
     createdDate: number;
     endDate: number | null;
@@ -46,3 +47,8 @@ export type SearchResult = {
   list: ListType;
   board: BoardType;
 }[];
+
+export interface FileType {
+  id: string;
+  url: string;
+}

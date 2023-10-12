@@ -6,6 +6,8 @@ import { throttle } from '../helpers/helpers';
 import { editorReducer } from './reducers/editorResucer';
 import { commentsReducer } from './reducers/commentsReducer';
 import { searchReducer } from './reducers/searchReducer';
+import { uploadFileReducer } from './reducers/uploadFileReducer';
+import { filesReducer } from './reducers/filesReducer';
 
 const reducers = combineReducers({
   boards: boardsReducer,
@@ -14,6 +16,8 @@ const reducers = combineReducers({
   editor: editorReducer,
   comments: commentsReducer,
   search: searchReducer,
+  uploadFile: uploadFileReducer,
+  files: filesReducer,
 });
 
 const saveState = (state: State) => {

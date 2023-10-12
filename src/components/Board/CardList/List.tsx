@@ -2,6 +2,7 @@ import { connect } from 'react-redux';
 import { useState, useMemo, createRef } from 'react';
 import { Droppable } from 'react-beautiful-dnd';
 import { nanoid } from 'nanoid';
+import classNames from 'classnames';
 import { State } from '../../../redux/store';
 import type { ListType } from '../../../types';
 import AddItemForm from '../../AddItemForm/AddItemForm';
@@ -11,9 +12,7 @@ import Card from './Card/Card';
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 import { createCommentsList } from '../../../redux/actions/commentsActions';
 import { increaseCardNum } from '../../../redux/actions/boardsActions';
-
 import './List.scss';
-import classNames from 'classnames';
 
 const List = ({
   list,
@@ -81,7 +80,6 @@ const List = ({
           </div>
         )}
       </Droppable>
-
       {!addingItem && (
         <div className="add-card__btn" onClick={toggleAddingItem}>
           + <span>Create new card</span>

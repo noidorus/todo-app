@@ -1,13 +1,16 @@
 .sidebar {
   float: right;
   width: 120px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
   margin: 0 0 0 16px;
   padding: 0;
   list-style: none;
 
   &__item {
     border-radius: 4px;
-    margin: 6px 0;
+    // margin: 6px 0;
     position: relative;
     transition: all 0.2s linear;
 
