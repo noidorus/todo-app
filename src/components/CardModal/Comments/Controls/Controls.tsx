@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
+import { useConfirmationPopUp } from '../../../../hooks/useConfirmationPopUp';
 import AddItemForm from '../../../AddItemForm/AddItemForm';
 import {
   addComment,
@@ -20,9 +21,14 @@ export const Controls = ({
     setAddingComment(false);
   };
 
-  const handleDelete = () => {
+  const deleteComment = () => {
     dispatch(deleteComments(commentsListId, idsToDelete));
   };
+
+  const { openPopUp, popUp } = useConfirmationPopUp({
+    name: 'comment',
+    onClickConfirm: deleteComment,
+  });
 
   const handleClickAddComment = (text: string) => {
     const comment = {
@@ -42,9 +48,11 @@ export const Controls = ({
         >
           Reply
         </span>
-        <span className="controls controls-delete" onClick={handleDelete}>
+        <span className="controls controls-delete" onClick={openPopUp}>
           Delete
         </span>
+
+        {popUp}
       </div>
 
       {addingComment && (

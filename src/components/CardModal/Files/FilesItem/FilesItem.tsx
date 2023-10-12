@@ -2,11 +2,11 @@ import { MouseEvent } from 'react';
 import { connect } from 'react-redux';
 import { FileType } from '../../../../types';
 import { State } from '../../../../redux/store';
-
-import './FilesItem.scss';
 import { useConfirmationPopUp } from '../../../../hooks/useConfirmationPopUp';
 import { deleteFile } from '../../../../redux/actions/filesActions';
 import { deleteFileFromCard } from '../../../../redux/actions/cardsByIdActions';
+
+import './FilesItem.scss';
 
 export const FilesItem = ({
   file,

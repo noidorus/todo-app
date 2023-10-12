@@ -45,6 +45,7 @@ const CheckList = ({
         onChangeCheckbox={onChangeCheckbox}
         key={task.id}
         deleteTask={onDeleteTask}
+        cardId={id}
         {...task}
       />
     ));

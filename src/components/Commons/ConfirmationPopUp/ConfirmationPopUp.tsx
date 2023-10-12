@@ -1,8 +1,7 @@
 import { createRef } from 'react';
 import { Button } from '../Button/Button';
-
-import './ConfirmationPopUp.scss';
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
+import './ConfirmationPopUp.scss';
 
 export const ConfirmationPopUp = ({
   name,
