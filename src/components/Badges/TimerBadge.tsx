@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
-import { getDuration } from '../../../helpers/date';
+import { getDuration } from '../../helpers/date';
 import classNames from 'classnames';
-
-import './TimerBadge.scss';
 
 export const TimerBadge = ({ timer }: TimerBadgeProps) => {
   const [duration, setDuration] = useState(
@@ -24,6 +22,7 @@ export const TimerBadge = ({ timer }: TimerBadgeProps) => {
 
   const badgeVisible = !!timer.startedTime || timer.duration > 0;
   const classes = classNames({
+    badge: true,
     'timer-badge': true,
     'timer-badge-active': !!timer.startedTime,
     'timer-badge-paused': !timer.startedTime,

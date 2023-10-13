@@ -31,6 +31,8 @@ const Card = ({ card, index }: CardProps) => {
               taskList={card.taskList}
               description={card.description}
               timer={card.timer}
+              comments={card.comments}
+              files={card.files}
             />
           </Link>
         </li>

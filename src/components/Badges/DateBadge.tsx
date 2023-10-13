@@ -1,6 +1,5 @@
 import classNames from 'classnames';
-import { getDate } from '../../../helpers/date';
-import './DateBadge.scss';
+import { getDate } from '../../helpers/date';
 
 export const DateBadge = ({ date }: DateBadgeProps) => {
   const startDate = getDate(date.createdDate);
@@ -9,7 +8,9 @@ export const DateBadge = ({ date }: DateBadgeProps) => {
     dateNow.year > startDate.year ? startDate.full : startDate.noYear;
 
   if (!date.endDate) {
-    return <span className="date-badge">Created at: {formattedStartDate}</span>;
+    return (
+      <span className="badge date-badge">Created at: {formattedStartDate}</span>
+    );
   }
 
   const endDate = getDate(date.endDate);
@@ -17,6 +18,7 @@ export const DateBadge = ({ date }: DateBadgeProps) => {
     dateNow.year < endDate.year ? endDate.full : endDate.noYear;
 
   const classes = classNames({
+    badge: true,
     'date-badge': true,
     'date-timeout': dateNow.millis > endDate.millis,
   });
