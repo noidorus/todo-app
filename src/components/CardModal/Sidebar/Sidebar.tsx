@@ -13,6 +13,7 @@ import './Sidebar.scss';
 import { TimerPopUp } from './TimerPopUp/TimerPopUp';
 import { CardType } from '../../../types';
 import UploadFilePopUp from './UploadFilePopUp/UploadFilePopUp';
+import DeleteCardPopUp from './DeleteCardPopUp/DeleteCardPopUp';
 
 const Sidebar = (props: SidebarProps) => {
   return (
@@ -46,6 +47,10 @@ const Sidebar = (props: SidebarProps) => {
       <SidebarButtonLayout name="Upload file">
         <UploadFilePopUp id={props.id} />
       </SidebarButtonLayout>
+
+      <SidebarButtonLayout name="Delete card">
+        <DeleteCardPopUp listId={props.listId} id={props.id} />
+      </SidebarButtonLayout>
     </ul>
   );
 };
@@ -63,6 +68,7 @@ interface SidebarProps {
   date: CardType['date'];
   priority: CardType['priority'];
   timer: CardType['timer'];
+  listId: string;
   setPrioritySelector: (id: string, priority: string) => void;
   changeEndDate: (id: string, endDate: number | null) => void;
   setTimer: (id: string, startedTime: number) => void;

@@ -17,6 +17,7 @@ import {
   DELETE_FILE_FROM_CARD,
   ADD_COMMENT_TO_CARD,
   DELETE_COMMENTS_FROM_CARD,
+  DELETE_CARD,
 } from '../actions/cardsByIdActions';
 
 interface CardsByIdState {
@@ -82,11 +83,11 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         },
       };
     case CHANGE_TASK_STATUS:
-      const newTaskList = state[payload.id].taskList.map((task) =>
-        task.id === payload.taskId
+      const newTaskList = state[payload.id].taskList.map((task) => {
+        return task.id === payload.taskId
           ? { ...task, checked: payload.checked }
-          : task
-      );
+          : task;
+      });
 
       return {
         ...state,
@@ -96,9 +97,9 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         },
       };
     case DELETE_TASK:
-      const filteredList = state[payload.id].taskList.filter(
-        ({ id }) => id !== payload.taskId
-      );
+      const filteredList = state[payload.id].taskList.filter(({ id }) => {
+        return id !== payload.taskId;
+      });
 
       return {
         ...state,
@@ -150,9 +151,9 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         },
       };
     case DELETE_FILE_FROM_CARD:
-      const files = state[payload.id].files.filter(
-        (id) => id !== payload.fileId
-      );
+      const files = state[payload.id].files.filter((id) => {
+        return id !== payload.fileId;
+      });
 
       return {
         ...state,
@@ -170,9 +171,9 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
         },
       };
     case DELETE_COMMENTS_FROM_CARD:
-      const comments = state[payload.id].comments.filter(
-        (id) => !payload.commentsIds.includes(id)
-      );
+      const comments = state[payload.id].comments.filter((id) => {
+        return !payload.commentsIds.includes(id);
+      });
 
       return {
         ...state,
@@ -181,6 +182,11 @@ export const cardsByIdReducer: Reducer<CardsByIdState, CardsByIdActions> = (
           comments,
         },
       };
+    case DELETE_CARD:
+      const newCards = { ...state };
+      delete newCards[payload.id];
+
+      return { ...newCards };
     default:
       return state;
   }

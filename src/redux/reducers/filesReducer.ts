@@ -1,6 +1,6 @@
 import { Reducer } from 'redux';
 import { FileType } from '../../types';
-import { ADD_FILE, DELETE_FILE, FilesActions } from '../actions/filesActions';
+import { ADD_FILE, DELETE_FILES, FilesActions } from '../actions/filesActions';
 
 interface FilesState {
   [key: string]: FileType;
@@ -13,9 +13,11 @@ export const filesReducer: Reducer<FilesState, FilesActions> = (
   switch (type) {
     case ADD_FILE:
       return { ...state, [payload.file.id]: payload.file };
-    case DELETE_FILE:
+    case DELETE_FILES:
       const newState = { ...state };
-      delete newState[payload.id];
+      payload.ids.forEach((id) => {
+        delete newState[id];
+      });
 
       return { ...newState };
     default:

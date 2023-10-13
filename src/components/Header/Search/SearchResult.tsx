@@ -13,8 +13,9 @@ const SearchResult = ({ searchResult, clearSearch }: SearchResultProps) => {
     if (
       !classList.contains('search__input-wrapper') ||
       !classList.contains('search__input')
-    )
+    ) {
       clearSearch();
+    }
   });
 
   const handleClick = () => {

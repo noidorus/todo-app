@@ -13,6 +13,7 @@ export const ADD_FILE_TO_CARD = 'ADD_IMAGE';
 export const DELETE_FILE_FROM_CARD = 'DELETE_FILE_FROM_CARD';
 export const ADD_COMMENT_TO_CARD = 'ADD_COMMENT_TO_CARD';
 export const DELETE_COMMENTS_FROM_CARD = 'DELETE_COMMENTS_FROM_CARD';
+export const DELETE_CARD = 'DELETE_CARD';
 
 export const addCardToCards = (card: {
   id: string;
@@ -119,6 +120,11 @@ export const deleteCommentsFromCard = (
   payload: { id, commentsIds },
 });
 
+export const deleteCard = (id: string) => ({
+  type: DELETE_CARD,
+  payload: { id },
+});
+
 interface AddCardToCards {
   type: typeof ADD_CARD_TO_CARDS;
   payload: { id: string; title: string; cardNum: number };
@@ -179,6 +185,10 @@ interface DeleteCommentsFromCard {
   type: typeof DELETE_COMMENTS_FROM_CARD;
   payload: { id: string; commentsIds: string[] };
 }
+interface DeleteCard {
+  type: typeof DELETE_CARD;
+  payload: { id: string };
+}
 
 export type CardsByIdActions =
   | AddCardToCards
@@ -195,4 +205,5 @@ export type CardsByIdActions =
   | AddFileToCard
   | DeleteFileFromCard
   | AddCommentToCard
-  | DeleteCommentsFromCard;
+  | DeleteCommentsFromCard
+  | DeleteCard;

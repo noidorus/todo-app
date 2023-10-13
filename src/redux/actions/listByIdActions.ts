@@ -1,6 +1,7 @@
 export const CREATE_NEW_LISTS = 'CREATE_NEW_LISTS';
 export const ADD_CARD_TO_LIST = 'ADD_CARD_TO_LIST';
 export const MOVE_CARD = 'MOVE_CARD';
+export const DELETE_CARD_FROM_LIST = 'DELETE_CARD_FROM_LIST';
 
 export const moveCard = (
   sourceListId: string,
@@ -25,6 +26,14 @@ export const addCardToList = (
   payload: { cardId, listId },
 });
 
+export const deleteCardFromList = (
+  cardId: string,
+  listId: string
+): DeleteCardFromList => ({
+  type: DELETE_CARD_FROM_LIST,
+  payload: { cardId, listId },
+});
+
 interface CreateNewLists {
   type: typeof CREATE_NEW_LISTS;
   payload: string[];
@@ -43,4 +52,13 @@ interface MoveCard {
   };
 }
 
-export type ListByIdActions = CreateNewLists | AddCardToList | MoveCard;
+interface DeleteCardFromList {
+  type: typeof DELETE_CARD_FROM_LIST;
+  payload: { listId: string; cardId: string };
+}
+
+export type ListByIdActions =
+  | CreateNewLists
+  | AddCardToList
+  | MoveCard
+  | DeleteCardFromList;

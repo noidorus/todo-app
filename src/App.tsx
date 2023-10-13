@@ -15,7 +15,6 @@ function App() {
   return (
     <div className="App">
       <Header />
-
       <Routes location={background}>
         <Route path="/" element={<BoardsPage />} />
         <Route path="/:id" element={<ActiveBoardPage />} />

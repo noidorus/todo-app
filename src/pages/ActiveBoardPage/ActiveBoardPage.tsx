@@ -15,12 +15,22 @@ const ActiveBoardPage = ({ boards }: ActiveBoardPageProps) => {
 
   useEffect(() => {
     const cardId = searchParams.get('cardId');
+    const listId = searchParams.get('listId');
     if (cardId) {
       navigate(`/${id}`, { replace: true });
-      navigate(`/card/${cardId}`, { state: { background: `/${id}` } });
+      navigate(`/card/${cardId}?listId=${listId}`, {
+        state: { background: `/${id}` },
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchParams]);
+
+  useEffect(() => {
+    if (!activeBoard) {
+      navigate('/');
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!activeBoard) {
     return <div>Board not found!</div>;

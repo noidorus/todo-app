@@ -3,6 +3,7 @@ import { ListType } from '../../types';
 import {
   ADD_CARD_TO_LIST,
   CREATE_NEW_LISTS,
+  DELETE_CARD_FROM_LIST,
   ListByIdActions,
   MOVE_CARD,
 } from '../actions/listByIdActions';
@@ -17,13 +18,13 @@ export const listsByIdReducer: Reducer<ListbyIdState, ListByIdActions> = (
 ) => {
   switch (type) {
     case CREATE_NEW_LISTS:
-      const newLists = ['Queue', 'Development', 'Done'].reduce(
-        (acc, val, i) => {
+      const newLists = ['queue', 'development', 'done'].reduce(
+        (acc, title, i) => {
           return {
             ...acc,
             [payload[i]]: {
               id: payload[i],
-              title: val,
+              title,
               cards: [],
             },
           };
@@ -60,6 +61,18 @@ export const listsByIdReducer: Reducer<ListbyIdState, ListByIdActions> = (
         ...state,
         [sourceListId]: { ...state[sourceListId], cards: sourceCards },
         [destListId]: { ...state[destListId], cards: destinationCards },
+      };
+    case DELETE_CARD_FROM_LIST:
+      const cards = state[payload.listId].cards.filter((id) => {
+        return id !== payload.cardId;
+      });
+
+      return {
+        ...state,
+        [payload.listId]: {
+          ...state[payload.listId],
+          cards,
+        },
       };
     default:
       return state;

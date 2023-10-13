@@ -5,12 +5,13 @@ import { nanoid } from 'nanoid';
 import classNames from 'classnames';
 import { State } from '../../../redux/store';
 import type { ListType } from '../../../types';
-import AddItemForm from '../../AddItemForm/AddItemForm';
 import { addCardToList } from '../../../redux/actions/listByIdActions';
 import { addCardToCards } from '../../../redux/actions/cardsByIdActions';
-import Card from './Card/Card';
-import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
 import { increaseCardNum } from '../../../redux/actions/boardsActions';
+import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
+import { capitalize } from '../../../helpers/helpers';
+import AddItemForm from '../../AddItemForm/AddItemForm';
+import Card from './Card/Card';
 import './List.scss';
 
 const List = ({
@@ -35,7 +36,6 @@ const List = ({
 
     addCardToList(card.id, list.id);
     addCardToCards(card);
-    // createCommentsList(card.commentsId);
     increaseCardNum(list.id);
   };
 
@@ -47,6 +47,7 @@ const List = ({
     return list.cards.map((card, index) => (
       <Card key={card} index={index} cardId={card} />
     ));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [list.cards]);
 
   const classes = classNames({
@@ -56,7 +57,7 @@ const List = ({
 
   return (
     <div className="list-wrapper" ref={listRef}>
-      <h3>{list.title}</h3>
+      <h3>{capitalize(list.title)}</h3>
 
       <Droppable droppableId={list.id}>
         {(provided, snapshot) => (
@@ -87,7 +88,7 @@ const List = ({
 };
 
 export default connect(
-  ({ listById }: State, { listId }: OwnProps) => ({
+  ({ listById }: State, { listId }: { listId: string }) => ({
     list: listById[listId],
   }),
   { addCardToList, addCardToCards, increaseCardNum }
@@ -103,7 +104,4 @@ interface ListProps {
     title: string;
     cardNum: number;
   }) => void;
-}
-interface OwnProps {
-  listId: string;
 }

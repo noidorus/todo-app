@@ -10,7 +10,6 @@
 
   &__item {
     border-radius: 4px;
-    // margin: 6px 0;
     position: relative;
     transition: all 0.2s linear;
 
@@ -20,14 +19,19 @@
       }
     }
 
+    &-name {
+      padding: 4px 3px 4px 6px;
+      display: block;
+      cursor: pointer;
+    }
+
     .btn-sidebar {
       width: 100%;
     }
-  }
 
-  &__item-name {
-    padding: 4px 3px 4px 6px;
-    display: block;
-    cursor: pointer;
+    .confirmation__pop-up {
+      left: -125px;
+      top: -70px;
+    }
   }
 }

@@ -1,25 +1,25 @@
 import { FileType } from '../../types';
 
 export const ADD_FILE = 'ADD_FILE';
-export const DELETE_FILE = 'DELETE_FILE';
+export const DELETE_FILES = 'DELETE_FILES';
 
 export const addFile = (file: FileType): AddFile => ({
   type: ADD_FILE,
   payload: { file },
 });
 
-export const deleteFile = (id: string): DeleteFile => ({
-  type: DELETE_FILE,
-  payload: { id },
+export const deleteFiles = (ids: string[]): DeleteFiles => ({
+  type: DELETE_FILES,
+  payload: { ids },
 });
 
 interface AddFile {
   type: typeof ADD_FILE;
   payload: { file: FileType };
 }
-interface DeleteFile {
-  type: typeof DELETE_FILE;
-  payload: { id: string };
+interface DeleteFiles {
+  type: typeof DELETE_FILES;
+  payload: { ids: string[] };
 }
 
-export type FilesActions = AddFile | DeleteFile;
+export type FilesActions = AddFile | DeleteFiles;

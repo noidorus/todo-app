@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { FileType } from '../../../../types';
 import { State } from '../../../../redux/store';
 import { useConfirmationPopUp } from '../../../../hooks/useConfirmationPopUp';
-import { deleteFile } from '../../../../redux/actions/filesActions';
+import { deleteFiles } from '../../../../redux/actions/filesActions';
 import { deleteFileFromCard } from '../../../../redux/actions/cardsByIdActions';
 
 import './FilesItem.scss';
@@ -15,7 +15,7 @@ export const FilesItem = ({
   ...props
 }: FilesItemProps) => {
   const deleteFile = () => {
-    props.deleteFile(fileId);
+    props.deleteFiles([fileId]);
     props.deleteFileFromCard(cardId, fileId);
   };
 
@@ -48,13 +48,13 @@ export default connect(
   ({ files }: State, { fileId }: { fileId: string }) => ({
     file: files[fileId],
   }),
-  { deleteFile, deleteFileFromCard }
+  { deleteFiles, deleteFileFromCard }
 )(FilesItem);
 
 interface FilesItemProps {
   fileId: string;
   cardId: string;
   file: FileType;
-  deleteFile: (id: string) => void;
+  deleteFiles: (ids: string[]) => void;
   deleteFileFromCard: (id: string, fileId: string) => void;
 }
