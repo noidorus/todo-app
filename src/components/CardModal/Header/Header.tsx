@@ -1,7 +1,6 @@
 import { KeyboardEvent, createRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { changeCardTitle } from '../../../redux/actions/cardsByIdActions';
-import { State } from '../../../redux/store';
 import { TextArea } from '../../Commons/TextArea/TextArea';
 import './Header.scss';
 
@@ -44,12 +43,7 @@ const CardModalHeader = (props: CardModalHeaderProps) => {
   );
 };
 
-export default connect(
-  ({ cardsById }: State, { id }: { id: string }) => ({
-    title: cardsById[id].title,
-  }),
-  { changeCardTitle }
-)(CardModalHeader);
+export default connect(null, { changeCardTitle })(CardModalHeader);
 
 interface CardModalHeaderProps {
   title: string;

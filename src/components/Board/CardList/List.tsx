@@ -10,7 +10,6 @@ import { addCardToList } from '../../../redux/actions/listByIdActions';
 import { addCardToCards } from '../../../redux/actions/cardsByIdActions';
 import Card from './Card/Card';
 import { useOnClickOutside } from '../../../hooks/useOnClickOutside';
-import { createCommentsList } from '../../../redux/actions/commentsActions';
 import { increaseCardNum } from '../../../redux/actions/boardsActions';
 import './List.scss';
 
@@ -19,7 +18,6 @@ const List = ({
   cardNum,
   addCardToList,
   addCardToCards,
-  createCommentsList,
   increaseCardNum,
 }: ListProps) => {
   const [addingItem, setAddingItem] = useState(false);
@@ -31,14 +29,13 @@ const List = ({
   const onAddCard = (title: string) => {
     const card = {
       id: nanoid(10),
-      commentsId: nanoid(10),
       title,
       cardNum: cardNum,
     };
 
     addCardToList(card.id, list.id);
     addCardToCards(card);
-    createCommentsList(card.commentsId);
+    // createCommentsList(card.commentsId);
     increaseCardNum(list.id);
   };
 
@@ -93,20 +90,18 @@ export default connect(
   ({ listById }: State, { listId }: OwnProps) => ({
     list: listById[listId],
   }),
-  { addCardToList, addCardToCards, createCommentsList, increaseCardNum }
+  { addCardToList, addCardToCards, increaseCardNum }
 )(List);
 
 interface ListProps {
   list: ListType;
   cardNum: number;
   addCardToList: (cardId: string, listId: string) => void;
-  createCommentsList: (id: string) => void;
   increaseCardNum: (listId: string) => void;
   addCardToCards: (card: {
     id: string;
     title: string;
     cardNum: number;
-    commentsId: string;
   }) => void;
 }
 interface OwnProps {

@@ -1,7 +1,6 @@
 import { connect } from 'react-redux';
 import { useMemo, useState } from 'react';
 import { nanoid } from 'nanoid';
-import { State } from '../../../redux/store';
 import { Button } from '../../Commons/Button/Button';
 import TaskListItem from './TaskListItem/TaskListItem';
 import AddItemForm from '../../AddItemForm/AddItemForm';
@@ -45,6 +44,7 @@ const CheckList = ({
         onChangeCheckbox={onChangeCheckbox}
         key={task.id}
         deleteTask={onDeleteTask}
+        cardId={id}
         {...task}
       />
     ));
@@ -80,12 +80,9 @@ const CheckList = ({
   );
 };
 
-export default connect(
-  ({ cardsById }: State, { id }: { id: string }) => ({
-    taskList: cardsById[id].taskList,
-  }),
-  { addTask, changeTaskStatus, deleteTask }
-)(CheckList);
+export default connect(null, { addTask, changeTaskStatus, deleteTask })(
+  CheckList
+);
 
 interface CheckListProps {
   id: string;

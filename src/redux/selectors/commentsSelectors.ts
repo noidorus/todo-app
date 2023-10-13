@@ -11,10 +11,14 @@ const selectCommentsMap = (comments: CommentType[]) => {
   );
 };
 
-const recursiveUpdate = (updated: Node, nestedMap: Map<string, Node>) => {
+const recursiveUpdate = (
+  updated: Node,
+  nestedMap: Map<string, Node>,
+  rootId: string
+) => {
   const recur = (updated: Node): void => {
     nestedMap.set(updated.id, updated);
-    if (updated.id === 'root') {
+    if (updated.id === rootId) {
       return;
     }
     const parent = nestedMap.get(updated.pid);
@@ -29,28 +33,37 @@ const recursiveUpdate = (updated: Node, nestedMap: Map<string, Node>) => {
   return recur(updated);
 };
 
-const addNewComment = (comment: Node, nestedMap: Map<string, Node>) => {
+const addNewComment = (
+  comment: Node,
+  nestedMap: Map<string, Node>,
+  rootId: string
+) => {
   nestedMap.set(comment.id, comment);
   const parent = nestedMap.get(comment.pid);
-
+  // debugger;
   const updatedParent: Node = {
     ...parent!,
     children: [comment, ...parent!.children],
   };
-  recursiveUpdate(updatedParent, nestedMap);
+
+  recursiveUpdate(updatedParent, nestedMap, rootId);
 };
 
-export const selectGroupedComments = (comments: CommentType[]) => {
+export const selectGroupedComments = (
+  comments: CommentType[],
+  rootId: string
+) => {
   const currentMap = selectCommentsMap(comments);
   const nestedMap = new Map<string, Node>([
-    ['root', { id: 'root', pid: 'root', children: [], text: 'This is a root' }],
+    [rootId, { id: rootId, pid: rootId, children: [], text: 'This is a root' }],
   ]);
+
   [...currentMap.entries()].forEach(([id, comment]) => {
     if (!nestedMap.get(id)) {
-      addNewComment(comment, nestedMap);
+      addNewComment(comment, nestedMap, rootId);
     }
   });
-  return nestedMap.get('root')?.children;
+  return nestedMap.get(rootId)?.children;
 };
 
 export interface Node extends CommentType {

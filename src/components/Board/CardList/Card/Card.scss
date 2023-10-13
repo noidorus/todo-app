@@ -16,12 +16,7 @@
     word-break: break-word;
   }
 
-  &__badges {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    gap: 7px;
-    font-size: 13px;
+  .badges {
     margin-top: 3px;
   }
 }

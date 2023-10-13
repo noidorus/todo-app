@@ -21,7 +21,7 @@ export interface CardType {
   id: string;
   title: string;
   description: string;
-  commentsId: string;
+  comments: string[];
   priority: string;
   taskList: TaskType[];
   cardNum: number;

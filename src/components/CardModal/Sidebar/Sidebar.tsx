@@ -1,6 +1,5 @@
 import { connect } from 'react-redux';
 import { PrioritySelectorPopUp } from './PrioritySelectorPopUp/PrioritySelectorPopUp';
-import { State } from '../../../redux/store';
 import {
   changeEndDate,
   pauseTimer,
@@ -51,14 +50,19 @@ const Sidebar = (props: SidebarProps) => {
   );
 };
 
-export default connect(
-  ({ cardsById }: State, { id }: { id: string }) => ({
-    ...cardsById[id],
-  }),
-  { setPrioritySelector, changeEndDate, setTimer, pauseTimer, resetTimer }
-)(Sidebar);
+export default connect(null, {
+  setPrioritySelector,
+  changeEndDate,
+  setTimer,
+  pauseTimer,
+  resetTimer,
+})(Sidebar);
 
-interface SidebarProps extends CardType {
+interface SidebarProps {
+  id: string;
+  date: CardType['date'];
+  priority: CardType['priority'];
+  timer: CardType['timer'];
   setPrioritySelector: (id: string, priority: string) => void;
   changeEndDate: (id: string, endDate: number | null) => void;
   setTimer: (id: string, startedTime: number) => void;

@@ -1,18 +1,19 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { nanoid } from 'nanoid';
+import { useConfirmationPopUp } from '../../../../hooks/useConfirmationPopUp';
 import AddItemForm from '../../../AddItemForm/AddItemForm';
 import {
   addComment,
   deleteComments,
 } from '../../../../redux/actions/commentsActions';
 import './Controls.scss';
+import {
+  addCommentToCard,
+  deleteCommentsFromCard,
+} from '../../../../redux/actions/cardsByIdActions';
 
-export const Controls = ({
-  pid,
-  commentsListId,
-  idsToDelete,
-}: ControlsProps) => {
+export const Controls = ({ pid, cardId, idsToDelete }: ControlsProps) => {
   const [addingComment, setAddingComment] = useState(false);
   const dispatch = useDispatch();
 
@@ -20,9 +21,15 @@ export const Controls = ({
     setAddingComment(false);
   };
 
-  const handleDelete = () => {
-    dispatch(deleteComments(commentsListId, idsToDelete));
+  const deleteComment = () => {
+    dispatch(deleteCommentsFromCard(cardId, idsToDelete));
+    dispatch(deleteComments(idsToDelete));
   };
+
+  const { openPopUp, popUp } = useConfirmationPopUp({
+    name: 'comment',
+    onClickConfirm: deleteComment,
+  });
 
   const handleClickAddComment = (text: string) => {
     const comment = {
@@ -30,7 +37,8 @@ export const Controls = ({
       text,
       pid,
     };
-    dispatch(addComment(commentsListId, comment));
+    dispatch(addCommentToCard(cardId, comment.id));
+    dispatch(addComment(comment));
   };
 
   return (
@@ -42,9 +50,11 @@ export const Controls = ({
         >
           Reply
         </span>
-        <span className="controls controls-delete" onClick={handleDelete}>
+        <span className="controls controls-delete" onClick={openPopUp}>
           Delete
         </span>
+
+        {popUp}
       </div>
 
       {addingComment && (
@@ -61,6 +71,6 @@ export const Controls = ({
 
 interface ControlsProps {
   pid: string;
-  commentsListId: string;
+  cardId: string;
   idsToDelete: string[];
 }
