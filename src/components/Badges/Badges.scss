@@ -44,6 +44,7 @@
 
   &.files-badge {
     padding-left: 18px;
+    padding-right: 0;
 
     &::before {
       content: url('../../assets/images/attach-outline.svg');
@@ -56,13 +57,14 @@
   }
 
   &.comments-badge {
-    padding-left: 20px;
+    padding-left: 17px;
+    padding-right: 0;
 
     &::before {
       content: url('../../assets/images/chatbox-outline.svg');
       width: 14px;
       position: absolute;
-      left: 3px;
+      left: 1px;
       top: 3px;
     }
   }
